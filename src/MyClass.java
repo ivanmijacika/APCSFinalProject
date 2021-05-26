@@ -1,7 +1,14 @@
 public class MyClass {
-
-    public MyClass() { }
-
+    
+    private IInput input;
+    
+    public MyClass(IInput input) { this.input = input; }
+    
+    public void useInput() {
+       System.out.println("Input provided: " + input.getValue()); 
+    }
+    
+    
     public int getValue() {
         return 5;
     }
