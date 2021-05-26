@@ -12,7 +12,9 @@ public class Vector2D{
     return x;
   }
 
-//  public double getY(){}
+  public double getY(){
+    return y;
+  }
 
 //  public double magnitude(){}
 }
