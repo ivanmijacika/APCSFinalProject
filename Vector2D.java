@@ -21,4 +21,21 @@ public class Vector2D{
     return Math.sqrt(s); //square root of the sum of the squares
   }
 
+  public Vector2D add(Vector2D other){
+    double sumX = x + other.getX(); //sum of x components
+    double sumY = y + other.getY(); //sum of y components
+    Vector2D sum = new Vector2D(sumX, sumY);
+    return sum;
+  }
+
+  public Vector2D subtract(Vector2D other){
+    double difX = x - other.getX(); //difference of x components
+    double difY = y - other.getY(); //difference of y components
+    Vector2D dif = new Vector2D(difX, difY);
+    return dif;
+  }
+
+
+
 }
+
