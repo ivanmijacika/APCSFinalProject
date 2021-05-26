@@ -8,7 +8,9 @@ public class Vector2D{
     this.y = y;
   }
 
-//  public double getX(){}
+  public double getX(){
+    return x;
+  }
 
 //  public double getY(){}
 
