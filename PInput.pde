@@ -1,7 +1,19 @@
+import java.util.*;
+
 public class PInput implements IInput {
     
-    public boolean isHeld(int key) {
-        return false;
+    private Set<Integer> heldKeys = new HashSet<Integer>();
+    
+    void keyPressed() {
+        heldKeys.add(keyCode);
+    }
+    
+    void keyReleased() {
+        heldKeys.remove(keyCode);
+    }
+    
+    public boolean isHeld(int k) {
+        return heldKeys.contains(k);
     }
     
     public Vector2D getMouseScreenPos() {
