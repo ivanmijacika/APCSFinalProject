@@ -25,4 +25,24 @@ public class World {
         cameraPos = new Vector2D(50, 50);
     }
 
+    public Tile getTile(int x, int y) {
+        return tiles[y][x];
+    }
+
+    public void setTile(int x, int y, Tile t) {
+        tiles[y][x] = t;
+    }
+
+    public void tick(int deltaMillis) {
+        for (Entity e : entities) {
+            e.tick(deltaMillis);
+        }
+    }
+
+    public void draw() {
+        for (Entity e : entities) {
+            e.draw();
+        }
+    }
+
 }
