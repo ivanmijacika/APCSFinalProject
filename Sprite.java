@@ -12,4 +12,12 @@ public class Sprite{
     this.pivot = pivot;
   }
 
+  public int getPixel(int x, int y){
+    return image[x][y];
+  }
+
+  public Vector2D getPivot(){
+    return pivot;
+  }
+
 }
