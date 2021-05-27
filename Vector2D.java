@@ -49,5 +49,10 @@ public class Vector2D{
     return res;
   }
 
+  public Vector2D normalized(){
+    double m = magnitude();
+    return divide(m);
+  }
+
 }
 
