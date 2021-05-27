@@ -23,3 +23,4 @@ Yusuf Elsharawy:
 Ivan Mijacika:
 - 5/25: 
 - 5/26: I worked on/completed the `Vector2D` class and the `TilePos` class. I also worked on the `Sprite` class and implemented most of it.
+- 5/27: I added new methods (getHeight and getWidth) to the `Sprite` class and I started working on the `Renderer` class.
