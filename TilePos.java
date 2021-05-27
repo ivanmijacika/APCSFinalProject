@@ -7,12 +7,12 @@ public class TilePos{
     this.x = x;
     this.y = y;
   }
-/*
+
   public TilePos(Vector2D p){
-    x = ;
-    y = ;
+    x = (int)(p.getX());
+    y = (int)(p.getY());
   }
-*/
+
 
   public int getX(){
     return x;
@@ -23,8 +23,8 @@ public class TilePos{
   }
 
   public TilePos add(int x, int y){
-    int sumX = this.x + x;
-    int sumY = this.y + y;
+    int sumX = this.x + x; //sum of x coordinates
+    int sumY = this.y + y;  //sum of y coordinates
     TilePos t = new TilePos(sumX, sumY);
     return t;
   }
