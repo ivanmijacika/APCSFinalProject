@@ -13,3 +13,9 @@ This is a 2D platformer/sandbox game built with Java and Processing, with core f
 **UML Diagram:**
 ![UML Diagram](.github/uml.png)
 [Link to Lucidchart](https://lucid.app/lucidchart/be9a82dd-a053-4a9b-a668-78d0fa196f6d/edit?invitationId=inv_59b0790f-cfa2-4bc2-a18a-2e7590836402)
+
+**Development Log:**
+
+Yusuf Elsharawy:
+- 5/25: I finished the UML diagram and added it to `README.md`
+- 5/27: I experimented with compatibility between Processing and regular Java. I also implemented most of the `PInput` class.
