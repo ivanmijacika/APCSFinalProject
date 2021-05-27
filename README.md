@@ -19,3 +19,7 @@ This is a 2D platformer/sandbox game built with Java and Processing, with core f
 Yusuf Elsharawy:
 - 5/25: I finished the UML diagram and added it to `README.md`
 - 5/27: I experimented with compatibility between Processing and regular Java. I also implemented most of the `PInput` class.
+
+Ivan Mijacika:
+- 5/25: 
+- 5/26: I worked on/completed the `Vector2D` class and the `TilePos` class. I also worked on the `Sprite` class and implemented most of it.
