@@ -1,3 +1,4 @@
+import javax.xml.bind.util.ValidationEventCollector;
 import java.util.*;
 
 public class World {
@@ -20,6 +21,8 @@ public class World {
                 row[i] = Tile.AIR;
             }
         }
+        entities = new HashSet<Entity>();
+        cameraPos = new Vector2D(50, 50);
     }
-    
+
 }
