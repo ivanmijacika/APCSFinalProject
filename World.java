@@ -9,7 +9,6 @@ public class World {
     /*
     private Player player;
     */
-    private Vector2D cameraPos;
 
     public World(long seed) {
         width = 100;
@@ -21,7 +20,6 @@ public class World {
             }
         }
         entities = new HashSet<Entity>();
-        cameraPos = new Vector2D(50, 50);
     }
 
     public Tile getTile(int x, int y) {
