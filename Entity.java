@@ -10,6 +10,8 @@ public abstract class Entity {
         velocity = vel;
     }
 
+    public abstract void draw();
+
     public Vector2D getPosition() {
         return position;
     }
@@ -32,7 +34,7 @@ public abstract class Entity {
          */
         double deltaSec = deltaMillis/1000.0;
         setPosition(getPosition().add(getVelocity().multiply(deltaSec)));
-        
+
         Vector2D v = getVelocity().add(GRAVITY.multiply(deltaSec));
         if (v.getY() < -10) {  // maximum falling speed
             v = new Vector2D(v.getX(), -10);
