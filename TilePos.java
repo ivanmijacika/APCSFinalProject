@@ -13,4 +13,20 @@ public class TilePos{
     y = ;
   }
 */
+
+  public int getX(){
+    return x;
+  }
+
+  public int getY(){
+    return y;
+  }
+
+  public TilePos add(int x, int y){
+    int sumX = this.x + x;
+    int sumY = this.y + y;
+    TilePos t = new TilePos(sumX, sumY);
+    return t;
+  }
+
 }
