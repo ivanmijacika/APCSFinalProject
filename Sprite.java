@@ -20,4 +20,12 @@ public class Sprite{
     return pivot;
   }
 
+  public int getHeight(){
+    return image.length;
+  }
+
+  public int getWidth(){
+    return image[0].length;
+  }
+
 }
