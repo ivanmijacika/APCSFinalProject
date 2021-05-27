@@ -3,7 +3,6 @@ int lastFrame = 0;
 
 void setup() {
   size(900, 540);
-  frameRate(1000);
 }
 
 void draw() {
@@ -11,6 +10,7 @@ void draw() {
   lastFrame += deltaMillis;
   background(input.isHeld(' ') ? 127 : 0);
   text("FPS: " + frameRate, 0, height);
+  text("dt: " + deltaMillis, 100, height);
   Vector2D p = input.getMouseScreenPos();
   text(p.getX() + ", " + p.getY(), mouseX, mouseY);
 }
