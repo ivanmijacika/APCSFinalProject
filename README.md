@@ -20,3 +20,8 @@ Yusuf Elsharawy:
 - 5/25: I finished the UML diagram and added it to `README.md`
 - 5/26: I experimented with compatibility between Processing and regular Java. I also implemented most of the `PInput` class.
 - 5/27: I decided to split functionality from the `World` class, to a new `View` class, and designed its functionality. Upon realizing that I was diverging far from the UML, I decided to go back to work on it.
+
+Ivan Mijacika:
+- 5/25: 
+- 5/26: I worked on/completed the `Vector2D` class and the `TilePos` class. I also worked on the `Sprite` class and implemented most of it.
+- 5/27: I added new methods (getHeight and getWidth) to the `Sprite` class and I started working on the `Renderer` class.
