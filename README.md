@@ -21,6 +21,7 @@ Yusuf Elsharawy:
 - 5/25: I finished the UML diagram and added it to `README.md`
 - 5/26: I experimented with compatibility between Processing and regular Java. I also implemented most of the `PInput` class.
 - 5/27: I decided to split functionality from the `World` class, to a new `View` class, and designed its functionality. Upon realizing that I was diverging far from the UML, I decided to go back to work on it.
+- 5/28: I hardly wrote any code today; instead I focused on fixing the UML diagram and cleaning up other branches.
 
 Ivan Mijacika:
 - 5/25: 
