@@ -1,13 +1,15 @@
 public abstract class Entity {
 
     private World world;
-    private Vector2D position;
+    private Vector2D position;  // center
     private Vector2D velocity;
+    private Vector2D size;      // bounding box (total width & height)
 
-    public Entity(World world, Vector2D pos, Vector2D vel) {
+    public Entity(World world, Vector2D pos, Vector2D vel, Vector2D size) {
         this.world = world;
         position = pos;
         velocity = vel;
+        this.size = size;
     }
 
     public abstract void draw();
@@ -28,6 +30,14 @@ public abstract class Entity {
         this.velocity = velocity;
     }
 
+    public Vector2D getSize() {
+        return size;
+    }
+
+    public void setSize(Vector2D size) {
+        this.size = size;
+    }
+    
     public void tick(int deltaMillis) {
         Physics.moveEntity(world, this, deltaMillis/1000.0);
     }
