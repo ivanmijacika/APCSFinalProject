@@ -23,6 +23,7 @@ public class World {
     }
 
     public Tile getTile(int x, int y) {
+        if (x < 0 || y < 0 || x >= width || y >= height) return Tile.AIR;
         return tiles[y][x];
     }
 
