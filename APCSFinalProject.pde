@@ -1,6 +1,6 @@
 PInput input;
 World world;
-PView view;
+View view;
 Renderer renderer;
 int lastFrame = 0;
 
@@ -10,7 +10,7 @@ void setup() {
   size(900, 540);
   input = new PInput();
   world = new World(0);
-  view = new PView();
+  view = new View(width, height, 24);
   renderer = new Renderer();
   view.setTarget(new Vector2D(50, 50));
   
