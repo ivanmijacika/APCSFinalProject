@@ -64,5 +64,9 @@ public class Vector2D{
     return getX() == other.getX() && getY() == other.getY();
   }
 
+  public String toString() {
+    return "(" + getX() + ", " + getY() + ")";
+  }
+
 }
 
