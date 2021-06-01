@@ -1,17 +1,15 @@
 PInput input;
 World world;
 View view;
-Renderer renderer;
 int lastFrame = 0;
 
-Sprite testSprite;
+ISprite testSprite;
 
 void setup() {
   size(900, 540);
   input = new PInput();
   world = new World(0);
   view = new View(width, height, 24);
-  renderer = new Renderer();
   view.setTarget(new Vector2D(50, 50));
   
   PImage testImage = loadImage("placeholder.png");
@@ -21,7 +19,7 @@ void setup() {
       colors[y][x] = testImage.get(x, y);
     }
   }
-  testSprite = new Sprite(colors, new Vector2D(4,4));
+  testSprite = new PSprite(colors, new Vector2D(0,0), 1/8.0);
 }
 
 void draw() {
@@ -31,7 +29,7 @@ void draw() {
   //background(input.isHeld(' ') ? 127 : 0);
   background(#82B0FF);
   
-  renderer.drawSprite(testSprite, new Vector2D(50, 50), view);
+  testSprite.draw(view, new Vector2D(50, 50));
   
   fill(0);
   circle(width/2, height/2, 3);
