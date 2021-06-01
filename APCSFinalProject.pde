@@ -1,11 +1,27 @@
-PInput input = new PInput();
-World world = new World(0);
+PInput input;
+World world;
 PView view;
+Renderer renderer;
 int lastFrame = 0;
+
+Sprite testSprite;
 
 void setup() {
   size(900, 540);
-  view = new PView(world);
+  input = new PInput();
+  world = new World(0);
+  view = new PView();
+  renderer = new Renderer();
+  view.setTarget(new Vector2D(50, 50));
+  
+  PImage testImage = loadImage("placeholder.png");
+  int[][] colors = new int[8][8];
+  for (int y = 0; y < 8; y++) {
+    for (int x = 0; x < 8; x++) {
+      colors[y][x] = testImage.get(x, y);
+    }
+  }
+  testSprite = new Sprite(colors, new Vector2D(4,4));
 }
 
 void draw() {
@@ -14,6 +30,8 @@ void draw() {
   
   //background(input.isHeld(' ') ? 127 : 0);
   background(#82B0FF);
+  
+  renderer.drawSprite(testSprite, new Vector2D(50, 50), view);
   
   fill(0);
   circle(width/2, height/2, 3);
