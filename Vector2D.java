@@ -1,5 +1,7 @@
 public class Vector2D{
 
+  private static final Vector2D ZERO = new Vector2D(0,0);
+
   private double x;
   private double y;
 
@@ -52,6 +54,14 @@ public class Vector2D{
   public Vector2D normalized(){
     double m = magnitude();
     return divide(m);
+  }
+
+  public boolean equals(Object other) {
+    return (other instanceof Vector2D) && equals((Vector2D)other);
+  }
+
+  public boolean equals(Vector2D other) {
+    return getX() == other.getX() && getY() == other.getY();
   }
 
 }
