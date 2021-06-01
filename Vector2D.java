@@ -1,6 +1,6 @@
 public class Vector2D{
 
-  private static final Vector2D ZERO = new Vector2D(0,0);
+    public static final Vector2D ZERO = new Vector2D(0,0);
 
   private double x;
   private double y;
