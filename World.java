@@ -6,11 +6,13 @@ public class World {
     private int height;
     private Tile[][] tiles;
     private Set<Entity> entities;
+    private Game game;
     /*
     private Player player;
     */
 
-    public World(long seed) {
+    public World(Game game, long seed) {
+        this.game = game;
         width = 100;
         height = 100;
         tiles = new Tile[height][width];

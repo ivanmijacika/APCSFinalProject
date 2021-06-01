@@ -8,7 +8,7 @@ public class Game {
     public Game(View view, IInput input) {
         this.view = view;
         this.input = input;
-        world = new World(0);
+        world = new World(this, 0);
     }
 
     public void tick(double deltaTime) {

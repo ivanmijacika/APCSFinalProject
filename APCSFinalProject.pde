@@ -1,6 +1,6 @@
 PInput input;
-World world;
 View view;
+Game game;
 int lastFrame = 0;
 
 ISprite testSprite;
@@ -8,7 +8,7 @@ ISprite testSprite;
 void setup() {
   size(900, 540);
   input = new PInput();
-  world = new World(0);
+  game = new Game(view, input);
   view = new View(width, height, 24);
   view.setTarget(new Vector2D(50, 50));
   
@@ -28,6 +28,7 @@ void draw() {
   
   //background(input.isHeld(' ') ? 127 : 0);
   background(#82B0FF);
+  game.tick(deltaMillis/1000.0);
   
   testSprite.draw(view, new Vector2D(50, 50));
   
