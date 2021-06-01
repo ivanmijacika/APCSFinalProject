@@ -1,6 +1,6 @@
 public class Renderer{
  
-  public void drawSprite(Sprite s, Vector2D p, IView view){
+  public void drawSprite(Sprite s, Vector2D p, View view){
     p = view.worldToScreenPos(p);
     int scale = (int)view.getWorldScale();
     int fx = (int)(p.getX() - scale * s.getPivot().getX()); //finds xcor of top left corner of sprite
