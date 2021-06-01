@@ -8,6 +8,7 @@ public class Renderer{
     for (int r=0; r<s.getHeight()*scale; r+=scale){
       for (int c=0; c<s.getWidth()*scale; c+=scale){
         fill(s.getPixel(c/scale, r/scale));
+        noStroke();
         square(fx+c, fy+r, scale); //instead of coloring one pixel, a square of size 'extent' is drawn
       }
     }

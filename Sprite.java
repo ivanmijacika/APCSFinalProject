@@ -13,7 +13,7 @@ public class Sprite{
   }
 
   public int getPixel(int x, int y){
-    return image[x][y];
+    return image[y][x];
   }
 
   public Vector2D getPivot(){
