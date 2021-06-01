@@ -25,8 +25,8 @@ public class Physics {
         Vector2D vel = entity.getVelocity();
 
         Vector2D newV = vel.add(GRAVITY.multiply(deltaSec));
-        if (newV.getY() < -10) {  // maximum falling speed
-            newV = new Vector2D(newV.getX(), -10);
+        if (newV.getY() > 10) {  // maximum falling speed
+            newV = new Vector2D(newV.getX(), 10);
         }
         entity.setVelocity(newV);
 
