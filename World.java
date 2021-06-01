@@ -31,9 +31,9 @@ public class World {
         tiles[y][x] = t;
     }
 
-    public void tick(int deltaMillis) {
+    public void tick(double deltaTime) {
         for (Entity e : entities) {
-            e.tick(deltaMillis);
+            e.tick(deltaTime);
         }
     }
 

@@ -38,8 +38,8 @@ public abstract class Entity {
         this.size = size;
     }
 
-    public void tick(int deltaMillis) {
-        Physics.MoveResult result = Physics.moveEntity(world, this, deltaMillis/1000.0);
+    public void tick(double deltaTime) {
+        Physics.MoveResult result = Physics.moveEntity(world, this, deltaTime);
         if (result.x) setVelocity(new Vector2D(0, getVelocity().getY()));
         if (result.y) setVelocity(new Vector2D(getVelocity().getX(), 0));
     }
