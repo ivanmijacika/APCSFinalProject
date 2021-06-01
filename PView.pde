@@ -10,7 +10,7 @@ public class PView implements IView {
   }
   
   double getWorldScale() {
-    return 4;
+    return 20;
   }
   
   // For now, this just focuses on the center of the world,
