@@ -29,4 +29,16 @@ public class TilePos{
     return t;
   }
 
+  public boolean equals(Object other) {
+    return (other instanceof TilePos) && equals((TilePos)other);
+  }
+
+  public boolean equals(TilePos other) {
+    return getX() == other.getX() && getY() == other.getY();
+  }
+
+  public String toString() {
+    return "(" + getX() + ", " + getY() + ")";
+  }
+
 }
