@@ -7,9 +7,8 @@ public class Renderer{
     int fy = (int)(p.getY() - scale * s.getPivot().getY()); //finds ycor of top left corner of sprite
     for (int r=0; r<s.getHeight()*scale; r+=scale){
       for (int c=0; c<s.getWidth()*scale; c+=scale){
-        for (int i=0; i<scale; i++){//scales the pixels up
-          set(fx+c+i, fy+r+i, s.getPixel(c/scale, r/scale)); //sets screen pixels to color of sprite pixels
-        }
+        fill(s.getPixel(c/scale, r/scale));
+        square(fx, fy, scale); //instead of coloring one pixel, a square of size 'extent' is drawn
       }
     }
   }
