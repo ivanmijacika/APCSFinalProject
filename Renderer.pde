@@ -5,10 +5,10 @@ public class Renderer{
     int scale = (int)view.getWorldScale();
     int fx = (int)(p.getX() - scale * s.getPivot().getX()); //finds xcor of top left corner of sprite
     int fy = (int)(p.getY() - scale * s.getPivot().getY()); //finds ycor of top left corner of sprite
+    noStroke();
     for (int r=0; r<s.getHeight()*scale; r+=scale){
       for (int c=0; c<s.getWidth()*scale; c+=scale){
         fill(s.getPixel(c/scale, r/scale));
-        noStroke();
         square(fx+c, fy+r, scale); //instead of coloring one pixel, a square of size 'extent' is drawn
       }
     }
