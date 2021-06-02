@@ -2,11 +2,12 @@ import java.util.*;
 
 public class World {
 
+    public final Game game;
+
     private int width;
     private int height;
     private Tile[][] tiles;
     private Set<Entity> entities;
-    private Game game;
     /*
     private Player player;
     */
