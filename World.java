@@ -8,9 +8,7 @@ public class World {
     private int height;
     private Tile[][] tiles;
     private Set<Entity> entities;
-    /*
     private Player player;
-    */
 
     public World(Game game, long seed) {
         this.game = game;
@@ -23,6 +21,8 @@ public class World {
             }
         }
         entities = new HashSet<Entity>();
+        player = new Player(this, new Vector2D(width/2.0, height/2.0), new Vector2D(0, -10));
+        entities.add(player);
     }
 
     public Tile getTile(int x, int y) {
