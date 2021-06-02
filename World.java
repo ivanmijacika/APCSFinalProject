@@ -20,9 +20,17 @@ public class World {
                 row[i] = Tile.AIR;
             }
         }
+        generateWorld(seed);
         entities = new HashSet<Entity>();
         player = new Player(this, new Vector2D(width/2.0, height/2.0), new Vector2D(0, -10));
         entities.add(player);
+    }
+
+    // temporary stone platform from (40, 55) to (60, 55)
+    private void generateWorld(long seed) {
+        for (int x = 40; x <= 60; x++) {
+            tiles[55][x] = Tile.STONE;
+        }
     }
 
     public Tile getTile(int x, int y) {
