@@ -1,5 +1,6 @@
 PInput input;
 View view;
+PSpriteLoader spriteLoader;
 Game game;
 int lastFrame = 0;
 
@@ -8,9 +9,10 @@ ISprite testSprite;
 void setup() {
   size(900, 540);
   input = new PInput();
-  game = new Game(view, input);
   view = new View(width, height, 24);
   view.setTarget(new Vector2D(50, 50));
+  spriteLoader = new PSpriteLoader();
+  game = new Game(view, input, spriteLoader);
   
   PImage testImage = loadImage("placeholder.png");
   int[][] colors = new int[8][8];
@@ -29,6 +31,7 @@ void draw() {
   //background(input.isHeld(' ') ? 127 : 0);
   background(#82B0FF);
   game.tick(deltaMillis/1000.0);
+  game.draw();
   
   testSprite.draw(view, new Vector2D(50, 50));
   
