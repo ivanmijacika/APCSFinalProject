@@ -22,11 +22,15 @@ Yusuf Elsharawy:
 - 5/26: I experimented with compatibility between Processing and regular Java. I also implemented most of the `PInput` class.
 - 5/27: I decided to split functionality from the `World` class, to a new `View` class, and designed its functionality. Upon realizing that I was diverging far from the UML, I decided to go back to work on it.
 - 5/28: I hardly wrote any code today; instead I focused on fixing the UML diagram and cleaning up other branches.
-- 5/32: I implemented `PView` (tested) and `Physics` (untested), and cleaned up existing code to make this possible.
+- 5/31: I implemented `PView` (tested) and `Physics` (untested), and cleaned up existing code to make this possible.
+  I also redesigned the program to remove the unnecessary `Renderer` class, and move that functionality to `PSprite`,
+  replacing `Sprite` and implementing `ISprite`.
+- 6/01: I implemented `Game` class, `ISpriteLoader` & `PSpriteLoader`, and `Tile` definition & drawing.
+  I also started work on the `Player` class.
 
 Ivan Mijacika:
 - 5/25: 
 - 5/26: I worked on/completed the `Vector2D` class and the `TilePos` class. I also worked on the `Sprite` class and implemented most of it.
 - 5/27: I added new methods (getHeight and getWidth) to the `Sprite` class and I started working on the `Renderer` class.
 - 5/31: I continued working on the `Renderer` class by implementing a scale and changing the coordinates to fit the screen's coordinates (instead of the world's coordinates). I also made a small change to a method in the `Sprite` class.
-- 5/32: No new commits but I searched for sprites (for tiles and playe) and worked on resizing them for use.
+- 6/01: No new commits but I searched for sprites (for tiles and playe) and worked on resizing them for use.
