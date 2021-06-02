@@ -49,6 +49,12 @@ public class World {
     }
 
     public void draw() {
+        // should change to only region visible in view if it gets too slow
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                getTile(x, y).draw(game.view, x, y);
+            }
+        }
         for (Entity e : entities) {
             e.draw();
         }

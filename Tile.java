@@ -20,4 +20,9 @@ public enum Tile {
         }
     }
 
+    public void draw(View view, int x, int y) {
+        if (sprite != null)
+            sprite.draw(view, new Vector2D(x, y));
+    }
+
 }
