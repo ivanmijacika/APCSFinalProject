@@ -10,6 +10,7 @@ public class Game {
         this.view = view;
         this.input = input;
         this.spriteLoader = spriteLoader;
+        Tile.loadSprites(spriteLoader);
         world = new World(this, 0);
     }
 
