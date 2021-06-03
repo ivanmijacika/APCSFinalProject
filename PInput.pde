@@ -16,12 +16,8 @@ public class PInput implements IInput {
         return heldKeys.contains(k);
     }
     
-    public Vector2D getMouseScreenPos() {
+    public Vector2D getMousePos() {
         return new Vector2D(mouseX, mouseY);
-    }
-    
-    public Vector2D getMouseWorldPos() {
-        return new Vector2D(0, 0);
     }
     
 }

@@ -44,7 +44,7 @@ void draw() {
   text("dt: " + deltaMillis, 100, height);
   
   text(view.screenToWorldPos(new Vector2D(width/2,height/2))+"", width/2, height/2);
-  Vector2D p = input.getMouseScreenPos();
+  Vector2D p = input.getMousePos();
   Vector2D worldP = view.screenToWorldPos(p);
   text(p+"", mouseX, mouseY);
   text(worldP+"", mouseX, mouseY+30);
