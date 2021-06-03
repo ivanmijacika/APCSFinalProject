@@ -1,17 +1,17 @@
 public class PSprite implements ISprite {
 
-  private int[][] image;
+  private PImage image;
   private Vector2D pivot;
   private double scale;
 
-  public PSprite(int[][] image, Vector2D pivot, double scale) {
+  public PSprite(PImage image, Vector2D pivot, double scale) {
     this.image = image;
     this.pivot = pivot;
     this.scale = scale;
   }
 
   public int getPixel(int x, int y) {
-    return image[y][x];
+    return image.get(x, y);
   }
 
   public Vector2D getPivot() {
@@ -19,11 +19,11 @@ public class PSprite implements ISprite {
   }
 
   public int getHeight() {
-    return image.length;
+    return image.height;
   }
 
   public int getWidth() {
-    return image[0].length;
+    return image.width;
   }
 
   public double getScale() {
