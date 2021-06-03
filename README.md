@@ -27,6 +27,8 @@ Yusuf Elsharawy:
   replacing `Sprite` and implementing `ISprite`.
 - 6/01: I implemented `Game` class, `ISpriteLoader` & `PSpriteLoader`, and `Tile` definition & drawing.
   I also started work on the `Player` class.
+- 6/02: I continued work on the `Player` class, focusing on testing & improving the physics with "good-enough" controls.
+  I also made minor changes/improvements and added temporary controls for setting tiles to `AIR` and `STONE`.
 
 Ivan Mijacika:
 - 5/25: 
