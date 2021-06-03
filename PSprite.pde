@@ -32,16 +32,12 @@ public class PSprite implements ISprite {
 
   public void draw(View view, Vector2D p) {
     p = view.worldToScreenPos(p);
-    float scale = (float)(getScale() * view.getWorldScale());
+    int scale = (int)(getScale() * view.getWorldScale());
     float fx = (float)(p.getX() - scale * getPivot().getX()); //finds xcor of top left corner of sprite
     float fy = (float)(p.getY() - scale * getPivot().getY()); //finds ycor of top left corner of sprite
-    noStroke();
-    for (int r = 0; r < getHeight(); r++){
-      for (int c = 0; c < getWidth(); c++){
-        fill(getPixel(c, r));
-        square(fx + c*scale, fy + r*scale, scale); //instead of coloring one pixel, a square of size 'extent' is drawn
-      }
-    }
+    int newW = image.width * scale;
+    int newH = image.height * scale;
+    image(image, fx, fy, newW, newH);
   }
 
 }

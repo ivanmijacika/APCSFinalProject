@@ -15,13 +15,7 @@ void setup() {
   game = new Game(view, input, spriteLoader);
   
   PImage testImage = loadImage("placeholder.png");
-  int[][] colors = new int[8][8];
-  for (int y = 0; y < 8; y++) {
-    for (int x = 0; x < 8; x++) {
-      colors[y][x] = testImage.get(x, y);
-    }
-  }
-  testSprite = new PSprite(colors, new Vector2D(0,0), 1/8.0);
+  testSprite = new PSprite(testImage, new Vector2D(0,0), 1/8.0);
 }
 
 void draw() {
