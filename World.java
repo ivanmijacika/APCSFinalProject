@@ -38,8 +38,16 @@ public class World {
         return tiles[y][x];
     }
 
+    public Tile getTile(TilePos pos) {
+        return getTile(pos.getX(), pos.getY());
+    }
+
     public void setTile(int x, int y, Tile t) {
         tiles[y][x] = t;
+    }
+
+    public void setTile(TilePos pos, Tile t) {
+        setTile(pos.getX(), pos.getY(), t);
     }
 
     public void tick(double deltaTime) {
