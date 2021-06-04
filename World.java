@@ -66,9 +66,14 @@ public class World {
     }
 
     public void draw() {
-        // should change to only region visible in view if it gets too slow
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        Vector2D center = game.view.getTarget();
+        Vector2D topLeft = game.view.screenToWorldPos(Vector2D.ZERO);
+        Vector2D botRight = center.add(center.subtract(topLeft));
+        System.out.println(center + " " + topLeft + " " + botRight);
+        TilePos tLTile = new TilePos(topLeft);
+        TilePos bRTile = new TilePos(botRight);
+        for (int y = tLTile.getY(); y <= bRTile.getY(); y++) {
+            for (int x = tLTile.getX(); x <= bRTile.getX(); x++) {
                 getTile(x, y).draw(game.view, x, y);
             }
         }
