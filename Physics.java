@@ -37,7 +37,7 @@ public class Physics {
         return incrementalMove(world, entity, delta);
     }
 
-    private static boolean intersectsTile(World world, Entity entity) {
+    public static boolean intersectsTile(World world, Entity entity) {
         Vector2D pos = entity.getPosition();
         Vector2D size = entity.getSize();
 
