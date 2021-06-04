@@ -2,9 +2,7 @@ PInput input;
 View view;
 PSpriteLoader spriteLoader;
 Game game;
-int lastFrame = 0;
-
-ISprite testSprite;
+int lastMillis = 0;
 
 void setup() {
   size(900, 540);
@@ -13,35 +11,28 @@ void setup() {
   view.setTarget(new Vector2D(50, 50));
   spriteLoader = new PSpriteLoader();
   game = new Game(view, input, spriteLoader);
-  
-  PImage testImage = loadImage("placeholder.png");
-  testSprite = new PSprite(testImage, new Vector2D(0,0), 1/8.0);
 }
 
 void draw() {
-  int deltaMillis = millis() - lastFrame;
-  lastFrame += deltaMillis;
+  int deltaMillis = millis() - lastMillis;
+  lastMillis += deltaMillis;
   
-  //background(input.isHeld(' ') ? 127 : 0);
-  background(#82B0FF);
   game.tick(deltaMillis/1000.0);
+  background(#82B0FF);
   game.draw();
-  
-  testSprite.draw(view, new Vector2D(50, 50));
-  
-  fill(0);
-  circle(width/2, height/2, 3);
   
   fill(#FFFFFF);
   
-  text("FPS: " + frameRate, 0, height);
-  text("dt: " + deltaMillis, 100, height);
-  
-  text(view.screenToWorldPos(new Vector2D(width/2,height/2))+"", width/2, height/2);
-  Vector2D p = input.getMousePos();
-  Vector2D worldP = view.screenToWorldPos(p);
-  text(p+"", mouseX, mouseY);
-  text(worldP+"", mouseX, mouseY+30);
+  if (input.isHeld('\\')) {
+    text("FPS: " + frameRate, 0, height);
+    text("dt: " + deltaMillis, 100, height);
+    
+    text(view.screenToWorldPos(new Vector2D(width/2,height/2))+"", width/2, height/2);
+    Vector2D p = input.getMousePos();
+    Vector2D worldP = view.screenToWorldPos(p);
+    text(p+"", mouseX, mouseY);
+    text(worldP+"", mouseX, mouseY+30);
+  }
 }
 
 // passes key events to input
