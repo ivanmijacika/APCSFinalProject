@@ -75,5 +75,9 @@ public class World {
     public int getHeight() {
         return height;
     }
+    
+    public Player getPlayer() {
+        return player;
+    }
 
 }
