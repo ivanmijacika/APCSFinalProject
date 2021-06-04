@@ -30,6 +30,8 @@ Yusuf Elsharawy:
   I also started work on the `Player` class.
 - 6/02: I continued work on the `Player` class, focusing on testing & improving the physics with "good-enough" controls.
   I also made minor changes/improvements and added temporary controls for setting tiles to `AIR` and `STONE`.
+- 6/03: I cleaned up existing code & a sprite, improved `World` tile rendering, changed `PSprite` draw method, and improved player controls.
+  I also fixed/added to the UML diagram to show all changes made.
 
 Ivan Mijacika:
 - 5/25: 
