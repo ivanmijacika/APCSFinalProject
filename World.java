@@ -52,7 +52,8 @@ public class World {
     }
 
     public void setTile(int x, int y, Tile t) {
-        tiles[y][x] = t;
+        if (0 <= x && x < width && 0 <= y && y < width)
+            tiles[y][x] = t;
     }
 
     public void setTile(TilePos pos, Tile t) {
