@@ -27,9 +27,18 @@ public class World {
     }
 
     // temporary stone platform from (40, 55) to (60, 55)
-    private void generateWorld(long seed) {
+    private void generateWorld(long seed) {    /*  
         for (int x = 40; x <= 60; x++) {
             tiles[55][x] = Tile.STONE;
+        }*/
+        for (int x = 0; x < width; x++) {
+            tiles[55][x] = Tile.GRASS; 
+            for (int i = 0; i < 10; i++) {
+                tiles[56+i][x] = Tile.DIRT; 
+            }
+            for (int i = 66; i < height; i++) {
+                tiles[i][x] = Tile.STONE;
+            }
         }
     }
 
