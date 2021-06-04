@@ -16,6 +16,7 @@ public class Game {
 
     public void tick(double deltaTime) {
         world.tick(deltaTime);
+        view.setTarget(world.getPlayer().getPosition());
     }
 
     public void draw() {
