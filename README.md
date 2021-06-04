@@ -11,8 +11,9 @@ This is a 2D platformer/sandbox game built with Java and Processing, with core f
 **Prototype:** [Link to Doc](https://docs.google.com/document/d/1fGk8TCQy_TDWSslN20We0n-Hrf1ZC2wxaPKPVB0kvkg/edit?usp=sharing)
 
 **UML Diagram:** (most updated first)
-![Most Recent UML Diagram](.github/uml_1.png)
-![Old UML Diagram](.github/uml_0.png)
+![Most Recent UML Diagram](.github/uml_2.png)
+![Old UML Diagram](.github/uml_1.png)
+![Original UML Diagram](.github/uml_0.png)
 [Link to Lucidchart](https://lucid.app/lucidchart/be9a82dd-a053-4a9b-a668-78d0fa196f6d/edit?invitationId=inv_59b0790f-cfa2-4bc2-a18a-2e7590836402)
 
 **Development Log:**
