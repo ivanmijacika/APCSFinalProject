@@ -8,7 +8,6 @@ void setup() {
   size(900, 540);
   input = new PInput();
   view = new View(width, height, 16);
-  view.setTarget(new Vector2D(50, 50));
   spriteLoader = new PSpriteLoader();
   game = new Game(view, input, spriteLoader);
 }
