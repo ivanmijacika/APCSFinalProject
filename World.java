@@ -70,7 +70,6 @@ public class World {
         Vector2D center = game.view.getTarget();
         Vector2D topLeft = game.view.screenToWorldPos(Vector2D.ZERO);
         Vector2D botRight = center.add(center.subtract(topLeft));
-        System.out.println(center + " " + topLeft + " " + botRight);
         TilePos tLTile = new TilePos(topLeft);
         TilePos bRTile = new TilePos(botRight);
         for (int y = tLTile.getY(); y <= bRTile.getY(); y++) {
