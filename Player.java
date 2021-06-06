@@ -33,29 +33,31 @@ public class Player extends Entity {
             // if on ground (exactly 0 vertical velocity), jump
             // for now we'll ignore that this will let you cling to ceilings
             if (getVelocity().getY() == 0) {
-                setVelocity(new Vector2D(getVelocity().getX(), -25));
+                setVelocity(new Vector2D(getVelocity().getX(), -14.5));
             }
-            // 1/2 gravity while moving upwards & holding space - not *realistic* physics, but it feels better
-            if (getVelocity().getY() < -7.5) {
-                setVelocity(getVelocity().subtract(Physics.GRAVITY.multiply(deltaTime/2)));
+            // 15% gravity while moving fast upwards & holding space - not *realistic* physics, but it feels better
+            if (getVelocity().getY() < -10) {
+                setVelocity(getVelocity().subtract(Physics.GRAVITY.multiply(deltaTime*0.85)));
             }
-        }
+        }/* else if (getVelocity().getY() < 0) {
+            // 1.5x gravity while moving upwards & not holding space
+            setVelocity(getVelocity().add(Physics.GRAVITY.multiply(deltaTime*0.5)));
+        }*/
         int moveH = (input.isHeld('D') ? 1 : 0) - (input.isHeld('A') ? 1 : 0);
         Vector2D v = getVelocity();
         if (moveH == 0) {
-            double vDelta = 75 * deltaTime;
+            double vDelta = 50 * deltaTime;
             if (v.getY() != 0) {
                 vDelta *= 0.5;
             }
             setVelocity(new Vector2D(approachZero(v.getX(), vDelta), v.getY()));
         } else {
-            double targetSpeed = moveH * 30;
-            double vDelta = 50 * deltaTime;
-            if (v.getY() != 0) {
-                targetSpeed *= 0.5;
-                vDelta *= 0.5;
-            }
-            if (v.getX() * moveH < 5) {
+            double targetSpeed = moveH * 12;
+            double vDelta = 20 * deltaTime;
+            // slow start
+            if (Math.abs(v.getX()) < 2) {
+                vDelta *= 0.75;
+            } else if (v.getX() * moveH < 5) {  // fast turn around
                 vDelta *= 2;
             }
             if (v.getX() * moveH < targetSpeed * moveH) {

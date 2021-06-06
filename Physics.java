@@ -18,7 +18,7 @@ public class Physics {
 
     }
 
-    public static final Vector2D GRAVITY = new Vector2D(0, 75);
+    public static final Vector2D GRAVITY = new Vector2D(0, 70);
     public static final double MAX_FALL = 50;
 
     public static MoveResult moveEntity(World world, Entity entity, double deltaSec) {
