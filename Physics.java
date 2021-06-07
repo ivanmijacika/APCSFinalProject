@@ -32,7 +32,7 @@ public class Physics {
         entity.setVelocity(newV);
 
 
-        Vector2D delta = vel.multiply(deltaSec);
+        Vector2D delta = newV.multiply(deltaSec);
         //entity.setPosition(pos.add(delta));
         return incrementalMove(world, entity, delta);
     }
@@ -54,7 +54,7 @@ public class Physics {
         return false;
     }
 
-    private static final double STEP_SIZE = 0.05;
+    private static final double STEP_SIZE = 0.01;
     // not mathematically perfect, but quick and easy to code
     // will be replaced if found to be too slow
     private static MoveResult incrementalMove(World world, Entity entity, Vector2D delta) {

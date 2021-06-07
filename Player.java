@@ -5,6 +5,8 @@ public class Player extends Entity {
     private IInput input;
     private View view;
 
+    private boolean lastHoldingSpace = false;
+
     public Player(World world, Vector2D pos, Vector2D vel) {
         super(world, pos, vel, new Vector2D(1.5, 2.5));
         this.world = world;
@@ -32,17 +34,17 @@ public class Player extends Entity {
         if (input.isHeld(' ')) {
             // if on ground (exactly 0 vertical velocity), jump
             // for now we'll ignore that this will let you cling to ceilings
-            if (getVelocity().getY() == 0) {
+            if (getVelocity().getY() == 0 && !lastHoldingSpace) {
                 setVelocity(new Vector2D(getVelocity().getX(), -14.5));
             }
             // 15% gravity while moving fast upwards & holding space - not *realistic* physics, but it feels better
             if (getVelocity().getY() < -10) {
                 setVelocity(getVelocity().subtract(Physics.GRAVITY.multiply(deltaTime*0.85)));
             }
-        }/* else if (getVelocity().getY() < 0) {
-            // 1.5x gravity while moving upwards & not holding space
-            setVelocity(getVelocity().add(Physics.GRAVITY.multiply(deltaTime*0.5)));
-        }*/
+            lastHoldingSpace = true;
+        } else {
+            lastHoldingSpace = false;
+        }
         int moveH = (input.isHeld('D') ? 1 : 0) - (input.isHeld('A') ? 1 : 0);
         Vector2D v = getVelocity();
         if (moveH == 0) {
