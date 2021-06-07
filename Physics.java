@@ -81,9 +81,14 @@ public class Physics {
 
         entity.setPosition(entity.getPosition().add(deltaX));
         if (intersectsTile(world, entity)) {
-            result = MoveResult.HIT_X;
-            // replace with more precise adjustment if necessary:
-            entity.setPosition(entity.getPosition().subtract(deltaX));
+            // STEP UP FUNCTIONALITY
+            entity.setPosition(entity.getPosition().add(new Vector2D(0, -1)));
+            if (Math.abs(delta.getY()) <= STEP_SIZE && intersectsTile(world, entity)) {
+                result = MoveResult.HIT_X;
+                entity.setPosition(entity.getPosition().subtract(new Vector2D(0, -1)));
+                // replace with more precise adjustment if necessary:
+                entity.setPosition(entity.getPosition().subtract(deltaX));
+            }
         }
         entity.setPosition(entity.getPosition().add(deltaY));
         if (intersectsTile(world, entity)) {
