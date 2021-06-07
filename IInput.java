@@ -1,7 +1,8 @@
 public interface IInput {
     
-    public boolean isHeld(int key);
-    
-    public Vector2D getMousePos();
-    
+    boolean isHeld(int key);
+    Vector2D getMousePos();
+    void addMouseListener(IMouseListener mouseListener);
+    void removeMouseListener(IMouseListener mouseListener);
+
 }
