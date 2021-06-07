@@ -32,6 +32,8 @@ Yusuf Elsharawy:
   I also made minor changes/improvements and added temporary controls for setting tiles to `AIR` and `STONE`.
 - 6/03: I cleaned up existing code & a sprite, improved `World` tile rendering, changed `PSprite` draw method, and improved player controls.
   I also fixed/added to the UML diagram to show all changes made.
+- 6/06: I worked on improving player movement & physics, then started work on additional `IInput` methods & listeners,
+  to lay the groundwork for the UI system.
 
 Ivan Mijacika:
 - 5/25: 
