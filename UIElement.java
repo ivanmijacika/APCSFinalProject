@@ -8,6 +8,41 @@ public abstract class UIElement implements IMouseListener {
         this.rect = rect;
     }
 
-    // still figuring out how exactly this should all work
-    // i better get back to the UML...
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public abstract void draw();
+
+    public boolean contains(Vector2D pos) {
+        return rect.contains(pos.getX(), pos.getY());
+    }
+
+    protected boolean clicking = false;
+
+    @Override
+    public boolean mousePressed(IInput input, int button) {
+        if (contains(input.getMousePos())) {
+            clicking = true;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean mouseReleased(IInput input, int button) {
+        if (clicking) {
+            clicking = false;
+            if (contains(input.getMousePos())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean mouseWheel(IInput input, int button) {
+        return false;
+    }
+
 }
