@@ -43,3 +43,5 @@ Ivan Mijacika:
 - 5/31: I continued working on the `Renderer` class by implementing a scale and changing the coordinates to fit the screen's coordinates (instead of the world's coordinates). I also made a small change to a method in the `Sprite` class.
 - 6/01: No new commits but I searched for sprites (for tiles and player) and worked on resizing them for use.
 - 6/03: I added sprites for Dirt, Grass, and Stone that are used in world generation. I also made changes in the `PSprite` and `PSriteLoader` methods (also in setup) so that int[][] would be replaced with PImage for greater efficiency. I also added to the `Game` class so that the screen follows the player as they move.
+- 6/07: I added the classes `ItemStack` and `TileItem`, which will be used in the creation of an inventory system by storing data such as the item, the count of that item, and the sprite of the item.
+- 6/08: I added the abstract class `Item`, with two get methods. There are an additional two abstract methods (`getName` and `use`) which can be used by subclasses.
