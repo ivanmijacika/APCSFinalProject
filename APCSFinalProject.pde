@@ -34,7 +34,7 @@ void draw() {
   }
 }
 
-// passes key events to input
+// passes key & mouse events to input
 // i would prefer if this weren't necessary, oh well
 void keyPressed() {
   input.keyPressed();
@@ -42,4 +42,16 @@ void keyPressed() {
 
 void keyReleased() {
   input.keyReleased();
+}
+
+void mousePressed() {
+  input.mousePressed();
+}
+
+void mouseReleased() {
+  input.mouseReleased();
+}
+
+void mouseWheel(MouseEvent event) {
+  input.mouseWheel(event);
 }

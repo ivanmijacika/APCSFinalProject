@@ -13,6 +13,37 @@ public class PInput implements IInput {
     void keyReleased() {
         heldKeys.remove(keyCode);
     }
+
+    private int convertMouseButton(int mB) {
+        int button = 0;
+        if (mB == LEFT) button = 1;
+        else if (mB == RIGHT) button = 2;
+        else if (mB == CENTER) button = 3;
+        return button;
+    }
+
+    void mousePressed() {
+        int button = convertMouseButton(mouseButton);
+        for (IMouseListener listener : mouseListeners) {
+            if (listener.mousePressed(button))
+                return;
+        }
+    }
+
+    void mouseReleased() {
+        int button = convertMouseButton(mouseButton);
+        for (IMouseListener listener : mouseListeners) {
+            if (listener.mouseReleased(button))
+                return;
+        }
+    }
+
+    void mouseWheel(MouseEvent event) {
+        int count = event.getCount();
+        for (IMouseListener listener : mouseListeners) {
+            listener.mouseWheel(count);
+        }
+    }
     
     public boolean isHeld(int k) {
         return heldKeys.contains(k);
