@@ -2,6 +2,10 @@ public abstract class Item{
 
   private ISprite sprite;
 
+  public Item(ISprite sprite){
+    this.sprite = sprite;
+  }
+
   public abstract String getName();
 
   public ISprite getSprite(){
