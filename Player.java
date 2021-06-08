@@ -79,7 +79,7 @@ public class Player extends Entity implements IMouseListener {
     }
 
     @Override
-    public boolean mousePressed(int button) {
+    public boolean mousePressed(IInput input, int button) {
         if (button == 1) {
             mouseDown = true;
             return true;
@@ -88,7 +88,7 @@ public class Player extends Entity implements IMouseListener {
     }
 
     @Override
-    public boolean mouseReleased(int button) {
+    public boolean mouseReleased(IInput input,int button) {
         if (button == 1) {
             mouseDown = false;
             return true;
@@ -97,7 +97,7 @@ public class Player extends Entity implements IMouseListener {
     }
 
     @Override
-    public boolean mouseWheel(int amount) {
+    public boolean mouseWheel(IInput input, int amount) {
         selectedItem += amount;
         int n = Tile.values().length;
         selectedItem = ((selectedItem % n) + n) % n;

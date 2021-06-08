@@ -4,10 +4,10 @@ public interface IMouseListener {
 
     // these methods return true to "consume" an event,
     // so that it will not be passed to other listeners
-    boolean mousePressed(int button);
+    boolean mousePressed(IInput input, int button);
 
-    boolean mouseReleased(int button);
+    boolean mouseReleased(IInput input, int button);
 
-    boolean mouseWheel(int amount);
+    boolean mouseWheel(IInput input, int amount);
 
 }

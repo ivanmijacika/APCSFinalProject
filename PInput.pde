@@ -25,7 +25,7 @@ public class PInput implements IInput {
     void mousePressed() {
         int button = convertMouseButton(mouseButton);
         for (IMouseListener listener : mouseListeners) {
-            if (listener.mousePressed(button))
+            if (listener.mousePressed(this, button))
                 return;
         }
     }
@@ -33,7 +33,7 @@ public class PInput implements IInput {
     void mouseReleased() {
         int button = convertMouseButton(mouseButton);
         for (IMouseListener listener : mouseListeners) {
-            if (listener.mouseReleased(button))
+            if (listener.mouseReleased(this, button))
                 return;
         }
     }
@@ -41,7 +41,7 @@ public class PInput implements IInput {
     void mouseWheel(MouseEvent event) {
         int count = event.getCount();
         for (IMouseListener listener : mouseListeners) {
-            listener.mouseWheel(count);
+            listener.mouseWheel(this, count);
         }
     }
     
