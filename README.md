@@ -34,6 +34,7 @@ Yusuf Elsharawy:
   I also fixed/added to the UML diagram to show all changes made.
 - 6/06: I worked on improving player movement & physics, then started work on additional `IInput` methods & listeners,
   to lay the groundwork for the UI system.
+- 6/07: I continued work on mouse listeners and started to implement the UI system before realizing that I need to go back to the UML.
 
 Ivan Mijacika:
 - 5/25: 
