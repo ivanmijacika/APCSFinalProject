@@ -1,10 +1,12 @@
-public class Player extends Entity {
+public class Player extends Entity implements IMouseListener {
 
     private World world;
     private ISprite sprite;
     private IInput input;
     private View view;
 
+    private int selectedItem = 0;
+    private boolean mouseDown = false;
     private boolean lastHoldingSpace = false;
 
     public Player(World world, Vector2D pos, Vector2D vel) {
@@ -13,6 +15,8 @@ public class Player extends Entity {
         sprite = world.game.spriteLoader.load("player.png", new Vector2D(6,10), 1/8.0);
         input = world.game.input;
         view = world.game.view;
+
+        input.addMouseListener(this);
     }
 
     @Override
@@ -67,15 +71,38 @@ public class Player extends Entity {
             }
         }
 
-        // temporary controls for placing & breaking tiles
-        if (input.isHeld('Q')) {
+        if (mouseDown) {
+            // until we get a working inventory system & items, this'll do:
             TilePos pos = new TilePos(view.screenToWorldPos(input.getMousePos()));
-            world.setTile(pos, Tile.AIR);
-        }
-        if (input.isHeld('E')) {
-            TilePos pos = new TilePos(view.screenToWorldPos(input.getMousePos()));
-            world.setTile(pos, Tile.STONE);
+            world.setTile(pos, Tile.values()[selectedItem]);
         }
     }
 
+    @Override
+    public boolean mousePressed(int button) {
+        if (button == 1) {
+            mouseDown = true;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean mouseReleased(int button) {
+        if (button == 1) {
+            mouseDown = false;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean mouseWheel(int amount) {
+        selectedItem += amount;
+        int n = Tile.values().length;
+        selectedItem = ((selectedItem % n) + n) % n;
+        // until we have working UI, this'll do:
+        System.out.println(Tile.values()[selectedItem]);
+        return true;
+    }
 }
