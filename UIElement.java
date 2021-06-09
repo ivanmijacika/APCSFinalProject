@@ -15,7 +15,7 @@ public abstract class UIElement implements IMouseListener {
     public abstract void draw();
 
     public boolean contains(Vector2D pos) {
-        return rect.contains(pos.getX(), pos.getY());
+        return getRect().contains(pos.getX(), pos.getY());
     }
 
     protected boolean clicking = false;

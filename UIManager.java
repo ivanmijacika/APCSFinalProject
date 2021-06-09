@@ -16,4 +16,12 @@ public class UIManager {
         }
     }
 
+    public void addElement(UIElement element) {
+        elements.add(element);
+    }
+
+    public void removeElement(UIElement element) {
+        elements.remove(element);
+    }
+
 }
