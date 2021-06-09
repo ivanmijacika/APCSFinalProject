@@ -5,6 +5,7 @@ public class Player extends Entity implements IMouseListener {
     private IInput input;
     private View view;
 
+    private Inventory inventory;
     private int selectedItem = 0;
     private boolean mouseDown = false;
     private boolean lastHoldingSpace = false;
@@ -16,6 +17,9 @@ public class Player extends Entity implements IMouseListener {
         input = world.game.input;
         view = world.game.view;
 
+        inventory = new Inventory(world.game.spriteLoader);
+        world.game.uiManager.addElement(inventory);
+        input.addMouseListener(inventory);
         input.addMouseListener(this);
     }
 
