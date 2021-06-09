@@ -35,6 +35,8 @@ Yusuf Elsharawy:
 - 6/06: I worked on improving player movement & physics, then started work on additional `IInput` methods & listeners,
   to lay the groundwork for the UI system.
 - 6/07: I continued work on mouse listeners and started to implement the UI system before realizing that I need to go back to the UML.
+- 6/08: I finished what was needed for `UIElement` and `UIManager` (so far), and started implementing the `Inventory` class.
+  So far it just displays 10 of the `uiButton.png` sprite.
 
 Ivan Mijacika:
 - 5/25: 
