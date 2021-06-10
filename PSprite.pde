@@ -72,5 +72,25 @@ public class PSprite implements ISprite {
   public ISprite withScale(double scale) {
     return new PSprite(image, getPivot(), scale);
   }
+  
+  public void drawWithLight(View veiw, Vector2D p, double brightness){//adjusts darkness
+    p = view.worldToScreenPos(p);
+    int scale = (int)(getScale() * view.getWorldScale());
+    float fx = (float)(p.getX() - scale * getPivot().getX()); //finds xcor of top left corner of sprite
+    float fy = (float)(p.getY() - scale * getPivot().getY()); //finds ycor of top left corner of sprite
+    
+    for (int y = 0; y < getHeight() * scale; y++) {
+        for (int x = 0; x < getWidth() * scale; x++) {
+            int col = getPixel(x/scale, y/scale);
+            int r = (int)(brightness * red(col));
+            int g = (int)(brightness * green(col));
+            int b = (int)(brightness * blue(col));
+            col = color(r, g, b, alpha(col));
+            if (alpha(col) != 0) {
+                set((int)fx+x, (int)fy+y, col);
+            }
+        }
+    }
+  }
 
 }

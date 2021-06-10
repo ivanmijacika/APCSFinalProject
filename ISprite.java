@@ -7,5 +7,6 @@ public interface ISprite extends Cloneable {
     void drawUI(Vector2D p);
     void draw(View view, Vector2D p);
     public ISprite withScale(double scale);
+    void drawWithLight(View veiw, Vector2D p, double brightness);
 
 }
