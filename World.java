@@ -10,34 +10,53 @@ public class World {
     private Set<Entity> entities;
     private Player player;
 
-    public World(Game game, long seed) {
+    public World(Game game, int seed) {
         this.game = game;
-        width = 100;
-        height = 100;
+        width = 2000;
+        height = 1000;
         tiles = new Tile[height][width];
-        for (Tile[] row : tiles) {
-            for (int i = 0; i < row.length; i++) {
-                row[i] = Tile.AIR;
-            }
-        }
         generateWorld(seed);
         entities = new HashSet<Entity>();
-        player = new Player(this, new Vector2D(width/2.0, height/2.0), new Vector2D(0, -10));
+        player = new Player(this, new Vector2D(width/2.0, height/2.0 - 5), new Vector2D(0, -10));
         entities.add(player);
     }
-
-    // temporary stone platform from (40, 55) to (60, 55)
-    private void generateWorld(long seed) {    /*  
-        for (int x = 40; x <= 60; x++) {
-            tiles[55][x] = Tile.STONE;
-        }*/
-        for (int x = 0; x < width; x++) {
-            tiles[55][x] = Tile.GRASS; 
-            for (int i = 0; i < 10; i++) {
-                tiles[56+i][x] = Tile.DIRT; 
+    
+    private double heightFalloff(int x, int y) {
+        double y2 = height/2.0 - y;
+        return Math.exp(y2) + 1;
+    }
+    
+    private void generateWorld(int seed) {
+        for (Tile[] row : tiles) {
+            Arrays.fill(row, Tile.AIR);
+        }
+        double min = Double.MAX_VALUE;
+        double max = Double.MIN_VALUE;
+        INoiseGenerator noiseGen = game.noiseGenerator;
+        double[][] noiseMap = new double[height][width];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                double noise = noiseGen.perlin(seed, x*0.0002, y*0.0002);
+                noiseMap[y][x] = noise;
+                max = Math.max(max, noise);
+                min = Math.min(min, noise);
             }
-            for (int i = 66; i < height; i++) {
-                tiles[i][x] = Tile.STONE;
+        }
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                double noise = noiseMap[y][x];
+                noise -= min;
+                noise /= (max - min);
+                double falloff = heightFalloff(x, y);
+                noise *= falloff;
+                if (noise < 0.5) {
+                    setTile(x, y, Tile.STONE);
+                } else if (noise < Math.pow(falloff, 0.975) * 0.6) {
+                    setTile(x, y, Tile.DIRT);
+                    if (getTile(x, y-1) == Tile.AIR) {
+                        setTile(x, y, Tile.GRASS);
+                    }
+                }
             }
         }
     }
@@ -52,7 +71,7 @@ public class World {
     }
 
     public void setTile(int x, int y, Tile t) {
-        if (0 <= x && x < width && 0 <= y && y < width)
+        if (0 <= x && x < width && 0 <= y && y < height)
             tiles[y][x] = t;
     }
 
