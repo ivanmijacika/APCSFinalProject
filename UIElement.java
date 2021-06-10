@@ -18,12 +18,12 @@ public abstract class UIElement implements IMouseListener {
         return getRect().contains(pos.getX(), pos.getY());
     }
 
-    protected boolean clicking = false;
+    protected boolean[] clicking = new boolean[4];
 
     @Override
     public boolean mousePressed(IInput input, int button) {
         if (contains(input.getMousePos())) {
-            clicking = true;
+            clicking[button] = true;
             return true;
         }
         return false;
@@ -31,8 +31,8 @@ public abstract class UIElement implements IMouseListener {
 
     @Override
     public boolean mouseReleased(IInput input, int button) {
-        if (clicking) {
-            clicking = false;
+        if (clicking[button]) {
+            clicking[button] = false;
             if (contains(input.getMousePos())) {
                 return true;
             }
