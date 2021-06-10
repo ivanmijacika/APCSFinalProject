@@ -1,21 +1,25 @@
 public abstract class Item{
 
-  private ISprite sprite;
+    private ISprite sprite;
+    private String name;
 
-  public Item(ISprite sprite){
-    this.sprite = sprite;
-  }
+    public Item(String name, ISprite sprite) {
+        this.name = name;
+        this.sprite = sprite;
+    }
 
-  public abstract String getName();
+    public String getName() {
+        return name;
+    }
 
-  public ISprite getSprite(){
-    return sprite;
-  }
+    public ISprite getSprite(){
+      return sprite;
+    }
 
-  public abstract void use(Player player, ItemStack stack, Vector2D mousePos);
+    public abstract void use(Player player, ItemStack stack, Vector2D mousePos);
 
-  public int getMaxStackSize(){
-    return 99; //max size is 99 unless overriden
-  }
+    public int getMaxStackSize(){
+      return 99; //max size is 99 unless overridden
+    }
 
 }
