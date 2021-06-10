@@ -4,7 +4,7 @@ public interface IInput {
     Vector2D getMousePos();
     void addMouseListener(IMouseListener mouseListener);
     void removeMouseListener(IMouseListener mouseListener);
-    void addKeyListener(IMouseListener mouseListener);
-    void removeKeyListener(IMouseListener mouseListener);
+    void addKeyListener(IKeyListener keyListener);
+    void removeKeyListener(IKeyListener keyListener);
 
 }

@@ -8,6 +8,7 @@ public class PInput implements IInput {
     private Collection<IKeyListener> keyListeners = new LinkedHashSet<IKeyListener>();
     
     void keyPressed() {
+        if (key == ESC) key = 0; // stop Processing from quitting
         heldKeys.add(keyCode);
         for (IKeyListener listener : keyListeners) {
             if (listener.keyPressed(this, keyCode))
