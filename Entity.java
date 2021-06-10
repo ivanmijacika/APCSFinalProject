@@ -44,4 +44,7 @@ public abstract class Entity {
         if (result.y) setVelocity(new Vector2D(getVelocity().getX(), 0));
     }
 
+    public World getWorld() {
+        return world;
+    }
 }
