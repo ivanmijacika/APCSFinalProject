@@ -6,7 +6,7 @@ public enum Tile {
     private Item item;
 
     Tile() {
-        this(null);
+        this(null, null);
     }
 
     Tile(String filename) {
@@ -17,6 +17,10 @@ public enum Tile {
     Tile(String filename, Item item) {
         this.spriteFile = filename;
         this.item = item;
+    }
+    
+    public Item getItem() {
+        return item;
     }
 
     public ISprite getSprite() {
