@@ -53,6 +53,17 @@ public class Physics {
         }
         return false;
     }
+    
+    public static boolean intersectsTile(Entity entity, TilePos tp) {
+        Vector2D pos = entity.getPosition();
+        Vector2D size = entity.getSize();
+    
+        Vector2D halfSize = size.divide(2);
+        TilePos topLeft = new TilePos(pos.subtract(halfSize));
+        TilePos botRight = new TilePos(pos.add(halfSize));
+        return (topLeft.getX() <= tp.getX() && tp.getX() <= botRight.getX()
+                && topLeft.getY() <= tp.getY() && tp.getY() <= botRight.getY());
+    }
 
     private static final double STEP_SIZE = 0.01;
     // not mathematically perfect, but quick and easy to code
