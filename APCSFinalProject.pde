@@ -1,6 +1,7 @@
 PInput input;
 View view;
 PSpriteLoader spriteLoader;
+PNoiseGenerator noiseGenerator;
 Game game;
 int lastMillis = 0;
 
@@ -9,7 +10,8 @@ void setup() {
   input = new PInput();
   view = new View(width, height, 16);
   spriteLoader = new PSpriteLoader();
-  game = new Game(view, input, spriteLoader);
+  noiseGenerator = new PNoiseGenerator();
+  game = new Game(view, input, spriteLoader, noiseGenerator);
 }
 
 void draw() {
