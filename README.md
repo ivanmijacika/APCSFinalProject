@@ -37,6 +37,8 @@ Yusuf Elsharawy:
 - 6/07: I continued work on mouse listeners and started to implement the UI system before realizing that I need to go back to the UML.
 - 6/08: I finished what was needed for `UIElement` and `UIManager` (so far), and started implementing the `Inventory` class.
   So far it just displays 10 of the `uiButton.png` sprite.
+- 6/09: I worked on a whole variety of things, most of which involved adding methods to existing classes to make the item
+  system work. I fixed up all `Item`-related classes and `Tile` so that I'd be fully prepared to implement the `Inventory` tomorrow.
 
 Ivan Mijacika:
 - 5/25: 
