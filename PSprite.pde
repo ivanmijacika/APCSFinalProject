@@ -18,6 +18,10 @@ public class PSprite implements ISprite {
     return pivot;
   }
 
+  public void setPivot(Vector2D pivot) {
+    this.pivot = pivot;
+  }
+
   public int getHeight() {
     return image.height;
   }
@@ -26,14 +30,18 @@ public class PSprite implements ISprite {
     return image.width;
   }
 
+  public void setScale(double scale) {
+    this.scale = scale;
+  }
+
   public double getScale() {
     return scale;
   }
  
   public void drawUI(Vector2D p){
-    float fx = (float)(p.getX() - getPivot().getX()); //finds xcor of top left corner of sprite
-    float fy = (float)(p.getY() - getPivot().getY()); //finds ycor of top left corner of sprite
     int scale = (int)getScale();
+    float fx = (float)(p.getX() - scale * getPivot().getX()); //finds xcor of top left corner of sprite
+    float fy = (float)(p.getY() - scale * getPivot().getY()); //finds ycor of top left corner of sprite
 
     for (int y = 0; y < getHeight() * scale; y++) {
         for (int x = 0; x < getWidth() * scale; x++) {
@@ -59,6 +67,10 @@ public class PSprite implements ISprite {
             }
         }
     }
+  }
+
+  public ISprite withScale(double scale) {
+    return new PSprite(image, getPivot(), scale);
   }
 
 }
