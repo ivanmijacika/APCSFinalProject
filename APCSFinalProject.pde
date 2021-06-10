@@ -6,7 +6,7 @@ Game game;
 int lastMillis = 0;
 
 void setup() {
-  size(900, 540);
+  size(1080, 600);
   input = new PInput();
   view = new View(width, height, 16);
   spriteLoader = new PSpriteLoader();
@@ -19,7 +19,7 @@ void draw() {
   lastMillis += deltaMillis;
   
   game.tick(deltaMillis/1000.0);
-  background(#82B0FF);
+  background(#8DB3FF);
   game.draw();
   
   fill(#FFFFFF);
