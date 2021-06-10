@@ -3,18 +3,15 @@ public abstract class Item{
     private ISprite sprite;
     private String name;
 
-    public Item(String name, ISprite sprite) {
+    public Item(String name) {
         this.name = name;
-        this.sprite = sprite;
     }
 
     public String getName() {
         return name;
     }
 
-    public ISprite getSprite(){
-      return sprite;
-    }
+    public abstract void drawUI(Vector2D pos);
 
     public abstract void use(Player player, ItemStack stack, Vector2D mousePos);
 
