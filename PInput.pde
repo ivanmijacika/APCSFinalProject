@@ -4,14 +4,23 @@ public class PInput implements IInput {
     
     private Set<Integer> heldKeys = new HashSet<Integer>();
     // used LinkedHashSet to maintain order
-    private Set<IMouseListener> mouseListeners = new LinkedHashSet<IMouseListener>();
+    private Collection<IMouseListener> mouseListeners = new LinkedHashSet<IMouseListener>();
+    private Collection<IKeyListener> keyListeners = new LinkedHashSet<IKeyListener>();
     
     void keyPressed() {
         heldKeys.add(keyCode);
+        for (IKeyListener listener : keyListeners) {
+            if (listener.keyPressed(this, keyCode))
+                return;
+        }
     }
     
     void keyReleased() {
         heldKeys.remove(keyCode);
+        for (IKeyListener listener : keyListeners) {
+            if (listener.keyReleased(this, keyCode))
+                return;
+        }
     }
 
     private int convertMouseButton(int mB) {
@@ -59,6 +68,14 @@ public class PInput implements IInput {
 
     public void removeMouseListener(IMouseListener mouseListener) {
         mouseListeners.remove(mouseListener);
+    }
+
+    public void addKeyListener(IKeyListener keyListener) {
+        keyListeners.add(keyListener);
+    }
+
+    public void removeKeyListener(IKeyListener keyListener) {
+        keyListeners.remove(keyListener);
     }
     
 }
