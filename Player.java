@@ -1,5 +1,3 @@
-import java.awt.event.KeyEvent;
-
 public class Player extends Entity implements IMouseListener, IKeyListener {
 
     private World world;
