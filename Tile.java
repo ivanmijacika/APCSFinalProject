@@ -3,6 +3,7 @@ public enum Tile {
 
     private String spriteFile;
     private ISprite sprite = null;
+    private Item item;
 
     Tile() {
         this(null);
@@ -10,6 +11,16 @@ public enum Tile {
 
     Tile(String filename) {
         this.spriteFile = filename;
+        this.item = new TileItem(this);
+    }
+
+    Tile(String filename, Item item) {
+        this.spriteFile = filename;
+        this.item = item;
+    }
+
+    public ISprite getSprite() {
+        return sprite;
     }
 
     public static void loadSprites(ISpriteLoader loader) {
