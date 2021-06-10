@@ -9,10 +9,11 @@ public class PInput implements IInput {
     
     void keyPressed() {
         if (key == ESC) key = 0; // stop Processing from quitting
-        heldKeys.add(keyCode);
-        for (IKeyListener listener : keyListeners) {
-            if (listener.keyPressed(this, keyCode))
-                return;
+        if (heldKeys.add(keyCode)) {
+            for (IKeyListener listener : keyListeners) {
+                if (listener.keyPressed(this, keyCode))
+                    return;
+            }
         }
     }
     
