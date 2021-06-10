@@ -1,4 +1,4 @@
-public class Player extends Entity implements IMouseListener {
+public class Player extends Entity implements IMouseListener, IKeyListener {
 
     private World world;
     private ISprite sprite;
@@ -8,7 +8,7 @@ public class Player extends Entity implements IMouseListener {
     private Inventory inventory;
     private int selectedItem = 0;
     private boolean mouseDown = false;
-    private boolean lastHoldingSpace = false;
+    private boolean jumpNextFrame = false;
 
     public Player(World world, Vector2D pos, Vector2D vel) {
         super(world, pos, vel, new Vector2D(1.5, 2.5));
@@ -17,7 +17,7 @@ public class Player extends Entity implements IMouseListener {
         input = world.game.input;
         view = world.game.view;
 
-        inventory = new Inventory(world.game.spriteLoader);
+        inventory = new Inventory(input, world.game.spriteLoader);
         world.game.uiManager.addElement(inventory);
         input.addMouseListener(inventory);
         input.addMouseListener(this);
@@ -39,19 +39,19 @@ public class Player extends Entity implements IMouseListener {
     @Override
     public void tick(double deltaTime) {
         super.tick(deltaTime);
-        if (input.isHeld(' ')) {
+        if (jumpNextFrame) {
             // if on ground (exactly 0 vertical velocity), jump
             // for now we'll ignore that this will let you cling to ceilings
-            if (getVelocity().getY() == 0 && !lastHoldingSpace) {
+            if (getVelocity().getY() == 0) {
                 setVelocity(new Vector2D(getVelocity().getX(), -14.5));
             }
+            jumpNextFrame = false;
+        }
+        if (input.isHeld(' ')) {
             // 15% gravity while moving fast upwards & holding space - not *realistic* physics, but it feels better
             if (getVelocity().getY() < -10) {
-                setVelocity(getVelocity().subtract(Physics.GRAVITY.multiply(deltaTime*0.85)));
+                setVelocity(getVelocity().subtract(Physics.GRAVITY.multiply(deltaTime * 0.85)));
             }
-            lastHoldingSpace = true;
-        } else {
-            lastHoldingSpace = false;
         }
         int moveH = (input.isHeld('D') ? 1 : 0) - (input.isHeld('A') ? 1 : 0);
         Vector2D v = getVelocity();
@@ -109,4 +109,19 @@ public class Player extends Entity implements IMouseListener {
         System.out.println(Tile.values()[selectedItem]);
         return true;
     }
+    
+    @Override
+    public boolean keyPressed(IInput input, int keyCode) {
+        if (keyCode == ' ') {
+            jumpNextFrame = true;
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean keyReleased(IInput input, int keyCode) {
+        return false;
+    }
+    
 }
