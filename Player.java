@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 public class Player extends Entity implements IMouseListener, IKeyListener {
 
     private World world;
@@ -9,6 +11,7 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     private int selectedItem = 0;
     private boolean mouseDown = false;
     private boolean jumpNextFrame = false;
+    private boolean debugMode = false;
 
     public Player(World world, Vector2D pos, Vector2D vel) {
         super(world, pos, vel, new Vector2D(1.5, 2.5));
@@ -37,10 +40,8 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     private double approach(double from, double to, double by) {
         return approachZero(from - to, by) + to;
     }
-
-    @Override
-    public void tick(double deltaTime) {
-        super.tick(deltaTime);
+    
+    private void controlPlayer(double deltaTime) {
         if (jumpNextFrame) {
             // if on ground (exactly 0 vertical velocity), jump
             // for now we'll ignore that this will let you cling to ceilings
@@ -76,11 +77,23 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
                 setVelocity(new Vector2D(approach(v.getX(), targetSpeed, vDelta), v.getY()));
             }
         }
-
+    
         if (mouseDown) {
             // until we get a working inventory system & items, this'll do:
             TilePos pos = new TilePos(view.screenToWorldPos(input.getMousePos()));
             world.setTile(pos, Tile.values()[selectedItem]);
+        }
+    }
+    
+    @Override
+    public void tick(double deltaTime) {
+        if (!debugMode) {
+            super.tick(deltaTime);
+            controlPlayer(deltaTime);
+        } else {
+            int moveH = (input.isHeld('D') ? 1 : 0) - (input.isHeld('A') ? 1 : 0);
+            int moveW = (input.isHeld('S') ? 1 : 0) - (input.isHeld('W') ? 1 : 0);
+            setPosition(getPosition().add(new Vector2D(moveH, moveW).multiply(50*deltaTime)));
         }
     }
 
@@ -116,6 +129,10 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     public boolean keyPressed(IInput input, int keyCode) {
         if (keyCode == ' ') {
             jumpNextFrame = true;
+            return true;
+        }
+        if (keyCode == '\n') {  // enter
+            debugMode = !debugMode;
             return true;
         }
         return false;
