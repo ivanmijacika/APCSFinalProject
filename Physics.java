@@ -69,18 +69,19 @@ public class Physics {
     // not mathematically perfect, but quick and easy to code
     // will be replaced if found to be too slow
     private static MoveResult incrementalMove(World world, Entity entity, Vector2D delta) {
-        MoveResult result;
-        if (delta.magnitude() < STEP_SIZE) {
-            result = simpleMove(world, entity, delta);
-        } else {
+        MoveResult result = MoveResult.NONE;
+        while (delta.magnitude() > STEP_SIZE) {
             Vector2D step = delta.normalized().multiply(STEP_SIZE);
-            result = simpleMove(world, entity, step);
+            MoveResult stepResult = simpleMove(world, entity, step);
+            result = result.or(stepResult);
 
             Vector2D remaining = delta.subtract(step);
             if (result.x) remaining = new Vector2D(0, remaining.getY());
             if (result.y) remaining = new Vector2D(remaining.getX(), 0);
-            result = result.or(incrementalMove(world, entity, remaining));
+            
+            delta = remaining;
         }
+        result = result.or(simpleMove(world, entity, delta));
         return result;
     }
 
