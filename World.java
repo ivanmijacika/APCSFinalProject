@@ -146,6 +146,9 @@ public class World {
             ItemEntity entity = new ItemEntity(this, new Vector2D(x+0.5, y+0.5), stack);
             addEntity(entity);
             setTile(x, y, Tile.AIR);
+            if (getTile(x, y-1) == Tile.TREE) {
+                destroy(x, y-1);
+            }
         }
     }
     
