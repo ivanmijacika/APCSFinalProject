@@ -29,6 +29,14 @@ public class Inventory extends UIElement implements IKeyListener {
         }
     }
     
+    public ItemStack getStack(int slot) {
+        return stacks[slot];
+    }
+    
+    public void setStack(int slot, ItemStack stack) {
+        stacks[slot] = stack;
+    }
+    
     // returns remaining items
     public ItemStack addStack(ItemStack stack) {
         for (int i = 0; i < stacks.length && stack.getCount() > 0; i++) {
