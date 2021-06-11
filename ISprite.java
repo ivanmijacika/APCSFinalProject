@@ -8,5 +8,6 @@ public interface ISprite extends Cloneable {
     void draw(View view, Vector2D p);
     public ISprite withScale(double scale);
     void drawWithLight(View veiw, Vector2D p, double brightness);
+    public ISprite flipped();
 
 }
