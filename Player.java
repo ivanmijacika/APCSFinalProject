@@ -193,7 +193,7 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
             jumpNextFrame = true;
             return true;
         } else if (keyCode == '\n') {  // enter
-            debugMode = !debugMode;
+            //debugMode = !debugMode;
             return true;
         } else if ('0' <= keyCode && keyCode <= '9') {
             selectedItem = (keyCode - '0' + 9) % 10;
