@@ -11,6 +11,10 @@ public abstract class Item{
         return name;
     }
     
+    public String toString() {
+        return getName();
+    }
+    
     public abstract ISprite getSprite();
     
     public abstract void drawUI(Vector2D pos);

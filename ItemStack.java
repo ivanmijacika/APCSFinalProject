@@ -42,4 +42,8 @@ public class ItemStack {
 		count = c;
 	}
 	
+	public String toString() {
+		return "ItemStack(" + getItem() + ", " + getCount() + ")";
+	}
+	
 }
