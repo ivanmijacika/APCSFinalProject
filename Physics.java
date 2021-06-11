@@ -100,7 +100,6 @@ public class Physics {
     }
     
     private static boolean onGround(Entity entity) {
-        System.out.println(entity.getVelocity().getY());
         if (Math.abs(entity.getVelocity().getY()) > 3) return false;
         double foot = entity.getPosition().getY() + entity.getSize().getY()/2;
         if (Math.ceil(foot) - foot > STEP_SIZE) return false;
