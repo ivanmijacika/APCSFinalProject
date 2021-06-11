@@ -82,6 +82,13 @@ public class World {
             }
         }
     }
+    
+    public boolean freeFloating(TilePos tp) {
+        for (TilePos neighbor : tp.neighbors()) {
+            if (getTile(neighbor) != Tile.AIR) return false;
+        }
+        return true;
+    }
 
     public Tile getTile(int x, int y) {
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.AIR;

@@ -28,8 +28,9 @@ public class TileItem extends Item {
 	
 	@Override
 	public void use(Player player, ItemStack stack, Vector2D mousePos) {
+		World world = player.getWorld();
 		TilePos tp = new TilePos(mousePos);
-		if (stack.getCount() > 0 && player.getWorld().getTile(tp) == Tile.AIR
+		if (stack.getCount() > 0 && world.getTile(tp) == Tile.AIR && !world.freeFloating(tp)
 		&& player.inReach(tp) && !Physics.intersectsTile(player, tp)) {
 			stack.setCount(stack.getCount() - 1);
 			player.getWorld().setTile(tp, getTile());
