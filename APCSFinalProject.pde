@@ -1,17 +1,24 @@
 PInput input;
 View view;
 PSpriteLoader spriteLoader;
+PTextRenderer textRenderer;
 PNoiseGenerator noiseGenerator;
 Game game;
 int lastMillis = 0;
+
+PFont black;
+PFont normal;
 
 void setup() {
   size(1080, 600);
   input = new PInput();
   view = new View(width, height, 16);
   spriteLoader = new PSpriteLoader();
+  black = createFont("Roboto-Black.ttf", 15);
+  normal = createFont("Roboto-Regular.ttf", 15);
+  textRenderer = new PTextRenderer();
   noiseGenerator = new PNoiseGenerator();
-  game = new Game(view, input, spriteLoader, noiseGenerator);
+  game = new Game(view, input, spriteLoader, noiseGenerator, textRenderer);
 }
 
 void draw() {

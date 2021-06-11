@@ -20,7 +20,7 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         input = world.game.input;
         view = world.game.view;
 
-        inventory = new Inventory(this, input, world.game.spriteLoader);
+        inventory = new Inventory(this, input, world.game.spriteLoader, world.game.textRenderer);
         world.game.uiManager.addElement(inventory);
         input.addMouseListener(inventory);
         input.addKeyListener(inventory);
