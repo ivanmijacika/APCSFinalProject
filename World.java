@@ -69,7 +69,7 @@ public class World {
     
     private void plantTrees() {
         Random rand = game.random;
-        for (int x = rand.nextInt(20); x < width; x += 6 + rand.nextInt(20)) {
+        for (int x = rand.nextInt(20); x < width; x += 6 + rand.nextInt(15)) {
             // find top y level
             int topLevel = -1;
             for (int y = 0; y < height; y++) {
