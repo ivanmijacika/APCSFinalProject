@@ -73,7 +73,7 @@ public class PSprite implements ISprite {
     return new PSprite(image, getPivot(), scale);
   }
   
-  public void drawWithLight(View veiw, Vector2D p, double brightness){//adjusts darkness
+  public void drawWithLight(View view, Vector2D p, double brightness){//adjusts darkness
     p = view.worldToScreenPos(p);
     int scale = (int)(getScale() * view.getWorldScale());
     float fx = (float)(p.getX() - scale * getPivot().getX()); //finds xcor of top left corner of sprite
@@ -94,7 +94,7 @@ public class PSprite implements ISprite {
   }
   
   public ISprite flipped(){
-    PImage imageF = createImage(image.width, image.height, RGB); //will be flipped image
+    PImage imageF = createImage(image.width, image.height, ARGB); //will be flipped image
     for (int y=0; y<image.height; y++){
       for (int x=0; x<image.width; x++){
         imageF.set(x, y, image.get(image.width-x-1,y));
