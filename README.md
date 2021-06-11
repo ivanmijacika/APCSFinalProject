@@ -13,11 +13,11 @@ This is a 2D platformer/sandbox game built with Java and Processing, with core f
 **Prototype:** [Link to Doc](https://docs.google.com/document/d/1fGk8TCQy_TDWSslN20We0n-Hrf1ZC2wxaPKPVB0kvkg/edit?usp=sharing)
 
 ---
-##Instructions
+## Instructions
 
-###Setup & Execution
+### Setup & Execution
 
-####Via Processing:
+#### Via Processing:
 
 In order to run this project, you will need to download [Processing](https://processing.org/download/).
 After cloning this repo to your machine:
@@ -26,13 +26,13 @@ git clone https://github.com/ivanmijacika/APCSFinalProject.git
 ```
 you should open `APCSFinalProject.pde` in Processing. Click play, and it should run at a smooth 50+ FPS after a few seconds of loading.
 
-####Release:
+#### Release:
 You can alternatively download an executable for Linux or Windows and your architecture from the
 [releases page](https://github.com/ivanmijacika/APCSFinalProject/releases).
 In order to run any one of these, you will need to have Java installed, unless you are using 64-bit Windows,
 in which case you can download the zip with Java embedded.
 
-###Controls
+### Controls
 
 Use A and D to walk left and right, and Space to jump.
 
@@ -43,10 +43,10 @@ Press Esc to open your full inventory, where you can click on stacks of items to
 
 ---
 
-##UML Diagram:
-###Most Updated:
+## UML Diagram:
+### Most Updated:
 ![Most Recent UML Diagram](.github/uml_3.png)
-###Older Versions:
+### Older Versions:
 ![Old UML Diagram](.github/uml_2.png)
 ![Older UML Diagram](.github/uml_1.png)
 ![Original UML Diagram](.github/uml_0.png)
@@ -54,7 +54,7 @@ Press Esc to open your full inventory, where you can click on stacks of items to
 
 ---
 
-##Development Log:
+## Development Log:
 
 Yusuf Elsharawy:
 - 5/25: I finished the UML diagram and added it to `README.md`
