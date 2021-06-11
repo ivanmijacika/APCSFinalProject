@@ -15,7 +15,7 @@ void setup() {
   view = new View(width, height, 16);
   spriteLoader = new PSpriteLoader();
   black = createFont("Roboto-Black.ttf", 15);
-  normal = createFont("Roboto-Regular.ttf", 15);
+  normal = createFont("Roboto-Regular.ttf", 14);
   textRenderer = new PTextRenderer();
   noiseGenerator = new PNoiseGenerator();
   game = new Game(view, input, spriteLoader, noiseGenerator, textRenderer);

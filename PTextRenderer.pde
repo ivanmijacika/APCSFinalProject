@@ -6,7 +6,7 @@ public class PTextRenderer implements ITextRenderer {
     text(str, (float)pos.getX(), (float)pos.getY());
     fill(#FFFFFF);
     textFont(normal);
-    text(str, (float)pos.getX(), (float)pos.getY());
+    text(str, (float)pos.getX()+0.5, (float)pos.getY()-0.5);
   }
   
   public void draw(String str, View view, Vector2D pos) {
