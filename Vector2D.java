@@ -53,6 +53,10 @@ public class Vector2D{
     Vector2D res = new Vector2D(quoX, quoY);
     return res;
   }
+  
+  public Vector2D scale(double x, double y) {
+    return new Vector2D(getX()*x, getY()*y);
+  }
 
   public Vector2D normalized(){
     double m = magnitude();

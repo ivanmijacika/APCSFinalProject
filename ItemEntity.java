@@ -25,7 +25,7 @@ public class ItemEntity extends Entity {
 		Vector2D vel = getVelocity();
 		// attraction to player
 		Vector2D toPlayer = getWorld().getPlayer().getPosition().subtract(getPosition());
-		vel = vel.add(toPlayer.multiply(30*deltaTime).divide(toPlayer.sqrMagnitude()));
+		vel = vel.add(toPlayer.multiply(30*deltaTime).divide(toPlayer.sqrMagnitude()).scale(1, 10));
 		// slow down
 		vel = new Vector2D(approachZero(vel.getX(), 5*deltaTime), vel.getY());
 		
