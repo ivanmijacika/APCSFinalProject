@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 public class Inventory extends UIElement implements IKeyListener {
     
     private static final int CLOSED_HEIGHT = 32;
-    private static final int OPEN_HEIGHT = 152;
+    private static final int OPEN_HEIGHT = 140;
     
     private ISprite sprite;
     private ItemStack[] stacks = new ItemStack[40];
@@ -12,23 +12,39 @@ public class Inventory extends UIElement implements IKeyListener {
     private int selected = -1;
     private boolean isOpen = false;
 
-    public Inventory(ISpriteLoader spriteLoader) {
-        super(new Rectangle(10, 10, 392, CLOSED_HEIGHT));
+    public Inventory(IInput input, ISpriteLoader spriteLoader) {
+        super(new Rectangle(10, 10, 356, CLOSED_HEIGHT));
         sprite = spriteLoader.load("uiButton.png", new Vector2D(8, 8), 2);
     }
     
     private void drawSlot(int slot) {
         Rectangle rect = getRect();
         Vector2D pos = new Vector2D(
-                rect.getX() + 16 + 40 * (slot % 10),
-                rect.getY() + 16 + 40 * (slot / 10));
+                rect.getX() + 16 + 36 * (slot % 10),
+                rect.getY() + 16 + 36 * (slot / 10));
         sprite.drawUI(pos);
         ItemStack stack = stacks[slot];
         if (stack != null) {
             stack.getItem().drawUI(pos);
         }
     }
-
+    
+    @Override
+    public boolean mousePressed(IInput input, int button) {
+        if(super.mousePressed(input, button)) {
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean mouseReleased(IInput input, int button) {
+        if(super.mouseReleased(input, button)) {
+            return true;
+        }
+        return false;
+    }
+    
     @Override
     public void draw() {
         int slotsShown = isOpen ? 40 : 10;
