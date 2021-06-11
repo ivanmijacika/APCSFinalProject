@@ -18,9 +18,12 @@ public class Vector2D{
     return y;
   }
 
+  public double sqrMagnitude() {
+    return x*x + y*y;
+  }
+  
   public double magnitude(){
-    double s = Math.pow(x, 2) + Math.pow(y, 2);//sum of the squares of x and y
-    return Math.sqrt(s); //square root of the sum of the squares
+    return Math.sqrt(sqrMagnitude());
   }
 
   public Vector2D add(Vector2D other){
