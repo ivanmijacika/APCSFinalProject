@@ -6,6 +6,7 @@ public class Inventory extends UIElement implements IKeyListener {
     private static final int CLOSED_HEIGHT = 32;
     private static final int OPEN_HEIGHT = 140;
     
+    private IInput input;
     private ISprite sprite;
     private ItemStack[] stacks = new ItemStack[40];
     
@@ -15,6 +16,7 @@ public class Inventory extends UIElement implements IKeyListener {
     public Inventory(IInput input, ISpriteLoader spriteLoader) {
         super(new Rectangle(10, 10, 356, CLOSED_HEIGHT));
         sprite = spriteLoader.load("uiButton.png", new Vector2D(8, 8), 2);
+        this.input = input;
     }
     
     private void drawSlot(int slot) {
@@ -23,9 +25,11 @@ public class Inventory extends UIElement implements IKeyListener {
                 rect.getX() + 16 + 36 * (slot % 10),
                 rect.getY() + 16 + 36 * (slot / 10));
         sprite.drawUI(pos);
-        ItemStack stack = stacks[slot];
-        if (stack != null) {
-            stack.getItem().drawUI(pos);
+        if (selected != slot) {
+            ItemStack stack = stacks[slot];
+            if (stack != null) {
+                stack.getItem().drawUI(pos);
+            }
         }
     }
     
@@ -60,9 +64,31 @@ public class Inventory extends UIElement implements IKeyListener {
         return stack;
     }
     
+    private int getSlot(Vector2D uiPos) {
+        int x = (int) ((uiPos.getX() - 8) / 36);
+        int y = (int) ((uiPos.getY() - 8) / 36);
+        return x + 10 * y;
+    }
+    
     @Override
     public boolean mousePressed(IInput input, int button) {
         if(super.mousePressed(input, button)) {
+            Vector2D mP = input.getMousePos();
+            int slot = getSlot(mP);
+            if (selected == -1) {
+                if (getStack(slot) != null) selected = slot;
+            } else if (selected == slot) {
+                selected = -1;
+            } else {
+                // swap two items
+                ItemStack clickedStack = getStack(slot);
+                ItemStack selectedStack = getStack(selected);
+                setStack(selected, clickedStack);
+                setStack(slot, selectedStack);
+                if (clickedStack == null) {
+                    selected = -1;
+                }
+            }
             return true;
         }
         return false;
@@ -82,6 +108,9 @@ public class Inventory extends UIElement implements IKeyListener {
         for (int i = 0; i < slotsShown; i++) {
             drawSlot(i);
         }
+        if (selected != -1) {
+            getStack(selected).getItem().drawUI(input.getMousePos());
+        }
     }
     
     @Override
@@ -90,6 +119,7 @@ public class Inventory extends UIElement implements IKeyListener {
             isOpen = !isOpen;
             Rectangle rect = getRect();
             rect.setSize(rect.width, isOpen ? OPEN_HEIGHT : CLOSED_HEIGHT);
+            if (!isOpen) selected = -1;
             return true;
         }
         return false;
