@@ -71,12 +71,12 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         }
     
         if (mouseDown) {
-            // until we get a working inventory system & items, this'll do:
-            TilePos pos = new TilePos(view.screenToWorldPos(input.getMousePos()));
-            if (selectedItem == 0) {
-                world.destroy(pos);
-            } else {
-                world.setTile(pos, Tile.values()[selectedItem]);
+            ItemStack stack = inventory.getStack(selectedItem);
+            if (stack != null) {
+                stack.getItem().use(this, stack, view.screenToWorldPos(input.getMousePos()));
+                if (stack.getCount() <= 0) {
+                    inventory.setStack(selectedItem, null);
+                }
             }
         }
     }
@@ -90,6 +90,15 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
             int moveH = (input.isHeld('D') ? 1 : 0) - (input.isHeld('A') ? 1 : 0);
             int moveW = (input.isHeld('S') ? 1 : 0) - (input.isHeld('W') ? 1 : 0);
             setPosition(getPosition().add(new Vector2D(moveH, moveW).multiply(50*deltaTime)));
+    
+            if (mouseDown) {
+                TilePos pos = new TilePos(view.screenToWorldPos(input.getMousePos()));
+                if (selectedItem == 0) {
+                    world.destroy(pos);
+                } else if (selectedItem < Tile.values().length) {
+                    world.setTile(pos, Tile.values()[selectedItem]);
+                }
+            }
         }
         pickupItems();
     }
@@ -108,7 +117,7 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     
     public boolean inReach(TilePos tp) {
         Vector2D center = new Vector2D(tp.getX() + 0.5, tp.getY() + 0.5);
-        return center.subtract(getPosition()).magnitude() < 5;
+        return center.subtract(getPosition()).magnitude() < 6;
     }
 
     @Override
@@ -132,10 +141,10 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     @Override
     public boolean mouseWheel(IInput input, int amount) {
         selectedItem += amount;
-        int n = Tile.values().length;
+        //int n = Tile.values().length;
+        int n = 10;
         selectedItem = ((selectedItem % n) + n) % n;
-        // until we have working UI, this'll do:
-        System.out.println(Tile.values()[selectedItem]);
+        System.out.println(selectedItem);
         return true;
     }
     
@@ -144,10 +153,11 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         if (keyCode == ' ') {
             jumpNextFrame = true;
             return true;
-        }
-        if (keyCode == '\n') {  // enter
+        } else if (keyCode == '\n') {  // enter
             debugMode = !debugMode;
             return true;
+        } else if ('0' <= keyCode && keyCode <= '9') {
+            selectedItem = (keyCode - '0' + 9) % 10;
         }
         return false;
     }
