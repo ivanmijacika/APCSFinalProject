@@ -48,6 +48,25 @@ public class World {
         return Math.exp(y2) + 1;
     }
     
+    private void plantTree(int x, int y) {
+        Random rand = game.random;
+        int treeHeight = 10 + rand.nextInt(10);
+        for (int y2 = y; y2 > y - treeHeight; y2--) {
+            setTile(x, y2, Tile.TREE);
+            if (rand.nextDouble() < 0.1) {
+                setTile(x-1, y2, Tile.LEAVES);
+            }
+            if (rand.nextDouble() < 0.1) {
+                setTile(x+1, y2, Tile.LEAVES);
+            }
+        }
+        for (int y2 = y - treeHeight - 2; y2 <= y - treeHeight; y2++) {
+            for (int x2 = x-2; x2 <= x+2; x2++) {
+                setTile(x2, y2, Tile.LEAVES);
+            }
+        }
+    }
+    
     private void plantTrees() {
         Random rand = game.random;
         for (int x = rand.nextInt(20); x < width; x += 5 + rand.nextInt(20)) {
@@ -61,12 +80,7 @@ public class World {
                 }
             }
             if (topLevel == -1) continue;
-            // plant tree
-            topLevel -= 1;
-            int treeHeight = 10 + rand.nextInt(10);
-            for (int y = topLevel; y > topLevel - treeHeight; y--) {
-                setTile(x, y, Tile.TREE);
-            }
+            plantTree(x, topLevel - 1);
         }
     }
     
@@ -142,12 +156,22 @@ public class World {
     public void destroy(int x, int y) {
         Tile t = getTile(x, y);
         if (t != Tile.AIR) {
-            ItemStack stack = new ItemStack(t.getItem(), 1);
-            ItemEntity entity = new ItemEntity(this, new Vector2D(x+0.5, y+0.5), stack);
-            addEntity(entity);
+            if (t.getItem() != null) {
+                ItemStack stack = new ItemStack(t.getItem(), 1);
+                ItemEntity entity = new ItemEntity(this, new Vector2D(x + 0.5, y + 0.5), stack);
+                addEntity(entity);
+            }
             setTile(x, y, Tile.AIR);
             if (getTile(x, y-1) == Tile.TREE) {
                 destroy(x, y-1);
+            }
+            if (t == Tile.TREE || t == Tile.LEAVES) {
+                for (TilePos neighbor : new TilePos(x, y).neighbors()) {
+                    Tile other = getTile(neighbor);
+                    if (other == Tile.LEAVES) {
+                        destroy(neighbor);
+                    }
+                }
             }
         }
     }

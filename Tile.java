@@ -1,6 +1,7 @@
 public enum Tile {
     AIR, STONE("stone.PNG"), DIRT("dirt.PNG"), GRASS("grass.PNG", DIRT.item),
-    WOOD("wood.PNG"),  TREE("tree.PNG", WOOD.item, false);
+    WOOD("wood.PNG"),  TREE("tree.PNG", WOOD.item, false),
+    LEAVES("leaves.png", false);
     
     private boolean solid;
     private String spriteFile;
@@ -15,6 +16,12 @@ public enum Tile {
         this.spriteFile = filename;
         this.item = new TileItem(this);
         this.solid = true;
+    }
+    
+    Tile(String filename, boolean solid) {
+        this.spriteFile = filename;
+        this.item = null;
+        this.solid = solid;
     }
 
     Tile(String filename, Item item) {
