@@ -46,7 +46,7 @@ public class Physics {
         TilePos botRight = new TilePos(pos.add(halfSize));
         for (int y = topLeft.getY(); y <= botRight.getY(); y++) {
             for (int x = topLeft.getX(); x <= botRight.getX(); x++) {
-                if (world.getTile(x, y) != Tile.AIR) {
+                if (world.getTile(x, y).isSolid()) {
                     return true;
                 }
             }

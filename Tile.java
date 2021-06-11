@@ -1,23 +1,36 @@
 public enum Tile {
     AIR, STONE("stone.PNG"), DIRT("dirt.PNG"), GRASS("grass.PNG", DIRT.item),
-    WOOD("wood.PNG"),  TREE("tree.PNG", WOOD.item);
-
+    WOOD("wood.PNG"),  TREE("tree.PNG", WOOD.item, false);
+    
+    private boolean solid;
     private String spriteFile;
     private ISprite sprite = null;
     private Item item;
 
     Tile() {
-        this(null, null);
+        this(null, null, false);
     }
 
     Tile(String filename) {
         this.spriteFile = filename;
         this.item = new TileItem(this);
+        this.solid = true;
     }
 
     Tile(String filename, Item item) {
         this.spriteFile = filename;
         this.item = item;
+        this.solid = true;
+    }
+    
+    Tile(String filename, Item item, boolean solid) {
+        this.spriteFile = filename;
+        this.item = item;
+        this.solid = solid;
+    }
+    
+    public boolean isSolid() {
+        return solid;
     }
     
     public Item getItem() {
