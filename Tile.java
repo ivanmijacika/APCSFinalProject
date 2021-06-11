@@ -1,5 +1,6 @@
 public enum Tile {
-    AIR, STONE("stone.PNG"), DIRT("dirt.PNG"), GRASS("grass.PNG", DIRT.item);
+    AIR, STONE("stone.PNG"), DIRT("dirt.PNG"), GRASS("grass.PNG", DIRT.item),
+    WOOD("wood.PNG"),  TREE("tree.PNG", WOOD.item);
 
     private String spriteFile;
     private ISprite sprite = null;
