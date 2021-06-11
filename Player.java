@@ -79,7 +79,11 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         if (mouseDown) {
             // until we get a working inventory system & items, this'll do:
             TilePos pos = new TilePos(view.screenToWorldPos(input.getMousePos()));
-            world.setTile(pos, Tile.values()[selectedItem]);
+            if (selectedItem == 0) {
+                world.destroy(pos);
+            } else {
+                world.setTile(pos, Tile.values()[selectedItem]);
+            }
         }
     }
     
@@ -139,6 +143,11 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     @Override
     public boolean keyReleased(IInput input, int keyCode) {
         return false;
+    }
+    
+    @Override
+    public boolean stepsUp() {
+        return true;
     }
     
 }

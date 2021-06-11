@@ -11,8 +11,10 @@ public abstract class Entity {
         velocity = vel;
         this.size = size;
     }
-
-    public abstract void draw();
+    
+    public boolean stepsUp() { return false; }
+    
+    public abstract void draw(double brightness);
 
     public Vector2D getPosition() {
         return position;

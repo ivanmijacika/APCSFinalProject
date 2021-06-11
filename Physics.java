@@ -95,7 +95,7 @@ public class Physics {
         if (intersectsTile(world, entity)) {
             // STEP UP FUNCTIONALITY
             entity.setPosition(entity.getPosition().add(new Vector2D(0, -1)));
-            if (Math.abs(delta.getY()) <= STEP_SIZE && intersectsTile(world, entity)) {
+            if (!entity.stepsUp() || (Math.abs(delta.getY()) <= STEP_SIZE && intersectsTile(world, entity))) {
                 result = MoveResult.HIT_X;
                 entity.setPosition(entity.getPosition().subtract(new Vector2D(0, -1)));
                 // replace with more precise adjustment if necessary:
