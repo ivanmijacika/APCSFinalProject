@@ -19,8 +19,13 @@ public class ItemEntity extends Entity {
 	public void tick(double deltaTime) {
 		super.tick(deltaTime);
 		Vector2D vel = getVelocity();
+		// attraction to player
+		Vector2D toPlayer = getWorld().getPlayer().getPosition().subtract(getPosition());
+		vel = vel.add(toPlayer.multiply(30*deltaTime).divide(toPlayer.sqrMagnitude()));
+		// slow down
+		vel = new Vector2D(approachZero(vel.getX(), 5*deltaTime), vel.getY());
 		
-		setVelocity(new Vector2D(approachZero(vel.getX(), 5*deltaTime), vel.getY()));
+		setVelocity(vel);
 	}
 	
 }
