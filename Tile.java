@@ -35,9 +35,9 @@ public enum Tile {
         }
     }
 
-    public void draw(View view, int x, int y) {
+    public void draw(View view, int x, int y, double brightness) {
         if (sprite != null)
-            sprite.draw(view, new Vector2D(x, y));
+            sprite.drawWithLight(view, new Vector2D(x, y), brightness);
     }
 
 }

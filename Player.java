@@ -18,7 +18,7 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         input = world.game.input;
         view = world.game.view;
 
-        inventory = new Inventory(world.game.spriteLoader);
+        inventory = new Inventory(input, world.game.spriteLoader);
         world.game.uiManager.addElement(inventory);
         input.addMouseListener(inventory);
         input.addKeyListener(inventory);
@@ -27,8 +27,8 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     }
 
     @Override
-    public void draw() {
-        sprite.draw(world.game.view, getPosition());
+    public void draw(double brightness) {
+        sprite.drawWithLight(world.game.view, getPosition(), brightness);
     }
 
     private double approachZero(double from, double by) {
