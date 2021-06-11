@@ -84,6 +84,20 @@ public class Physics {
         result = result.or(simpleMove(world, entity, delta));
         return result;
     }
+    
+    public static boolean colliding(Entity e1, Entity e2) {
+        Vector2D p1 = e1.getPosition();
+        Vector2D s1 = e1.getSize();
+        
+        Vector2D p2 = e2.getPosition();
+        Vector2D s2 = e2.getSize();
+        
+        Vector2D displacement = p2.subtract(p1);
+        Vector2D totalSize = s1.add(s2);
+        
+        return Math.abs(displacement.getX()) < totalSize.getX() &&
+                Math.abs(displacement.getY()) < totalSize.getY();
+    }
 
     private static MoveResult simpleMove(World world, Entity entity, Vector2D delta) {
         MoveResult result = MoveResult.NONE;

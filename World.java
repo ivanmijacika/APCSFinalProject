@@ -157,6 +157,16 @@ public class World {
         return player;
     }
     
+    public Collection<Entity> getAllColliding(Entity entity) {
+        Collection<Entity> output = new ArrayList<Entity>();
+        for (Entity e : entities) {
+            if (e != entity && Physics.colliding(entity, e)) {
+                output.add(e);
+            }
+        }
+        return output;
+    }
+    
     public double getLight(int x, int y) {
         if (x < 0 || y < 0 || x >= width || y >= height) return 0;
         return lighting[y][x];
