@@ -26,7 +26,7 @@ public class Pickaxe extends Item {
 	public void use(Player player, ItemStack stack, Vector2D mousePos) {
 		World world = player.getWorld();
 		TilePos tp = new TilePos(mousePos);
-		if (player.inReach(tp) && world.getTile(tp) != Tile.WOOD) {
+		if (player.inReach(tp) && world.getTile(tp) != Tile.TREE) {
 			world.destroy(tp);
 		}
 	}
