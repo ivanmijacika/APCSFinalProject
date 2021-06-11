@@ -37,6 +37,7 @@ in which case you can download the zip with Java embedded.
 Use A and D to walk left and right, and Space to jump.
 
 Press keys 0-9, or scroll your mouse wheel, to select different items in your hotbar.
+Click on tiles in the world to use your item (maximum range of ~6 tiles).
 
 Press Esc to open your full inventory, where you can click on stacks of items to move, swap, and merge them.
 
