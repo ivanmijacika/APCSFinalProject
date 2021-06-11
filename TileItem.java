@@ -28,17 +28,11 @@ public class TileItem extends Item {
 	
 	@Override
 	public void use(Player player, ItemStack stack, Vector2D mousePos) {
-		if (stack.getCount() > 0) {
-			TilePos tp = new TilePos(mousePos);
-			if (player.getWorld().getTile(tp) == Tile.AIR) {
-				Vector2D center = new Vector2D(tp.getX() + 0.5, tp.getY() + 0.5);
-				if (center.subtract(player.getPosition()).magnitude() < 5) {
-					if (!Physics.intersectsTile(player, tp)) {
-						stack.setCount(stack.getCount() - 1);
-						player.getWorld().setTile(tp, getTile());
-					}
-				}
-			}
+		TilePos tp = new TilePos(mousePos);
+		if (stack.getCount() > 0 && player.getWorld().getTile(tp) == Tile.AIR
+		&& player.inReach(tp) && !Physics.intersectsTile(player, tp)) {
+			stack.setCount(stack.getCount() - 1);
+			player.getWorld().setTile(tp, getTile());
 		}
 	}
 	

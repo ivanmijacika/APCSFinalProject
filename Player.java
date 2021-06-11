@@ -105,6 +105,11 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
             }
         }
     }
+    
+    public boolean inReach(TilePos tp) {
+        Vector2D center = new Vector2D(tp.getX() + 0.5, tp.getY() + 0.5);
+        return center.subtract(getPosition()).magnitude() < 5;
+    }
 
     @Override
     public boolean mousePressed(IInput input, int button) {
