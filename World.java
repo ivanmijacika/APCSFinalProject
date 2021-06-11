@@ -14,8 +14,8 @@ public class World {
     public World(Game game, int seed) {
         this.game = game;
         
-        width = 2000;
-        height = 1000;
+        width = 100;
+        height = 100;
         tiles = new Tile[height][width];
         generateWorld(seed);
         
@@ -46,6 +46,28 @@ public class World {
     private double heightFalloff(int x, int y) {
         double y2 = height/2.0 - y;
         return Math.exp(y2) + 1;
+    }
+    
+    private void plantTrees() {
+        Random rand = game.random;
+        for (int x = rand.nextInt(20); x < width; x += 5 + rand.nextInt(20)) {
+            // find top y level
+            int topLevel = -1;
+            for (int y = 0; y < height; y++) {
+                Tile t = getTile(x, y);
+                if (t != Tile.AIR) {
+                    if (t == Tile.GRASS) topLevel = y;
+                    break;
+                }
+            }
+            if (topLevel == -1) continue;
+            // plant tree
+            topLevel -= 1;
+            int treeHeight = 10 + rand.nextInt(10);
+            for (int y = topLevel; y > topLevel - treeHeight; y--) {
+                setTile(x, y, Tile.TREE);
+            }
+        }
     }
     
     private void generateWorld(int seed) {
@@ -81,6 +103,7 @@ public class World {
                 }
             }
         }
+        plantTrees();
     }
     
     public boolean freeFloating(TilePos tp) {
@@ -185,7 +208,7 @@ public class World {
     
     private double getLightFrom(TilePos from, TilePos to) {
         double out = getLight(from);
-        if (getTile(from) == Tile.AIR) {
+        if (!getTile(from).isSolid()) {
             // to make cave illumination a feature instead of a bug
             //if (from.getX() != to.getX()) out -= 0.1;
         } else {
