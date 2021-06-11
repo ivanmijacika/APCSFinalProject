@@ -1,22 +1,52 @@
 # APCSFinalProject
 
+---
+
 **Group Name:** Re-Re-Logic
 
 **Group Members:** Ivan Mijacika, Yusuf Elsharawy
 
 **Description:**
 
-This is a 2D platformer/sandbox game built with Java and Processing, with core features similar to that of Terraria or Minecraft. You would be able to break and place blocks, while exploring the generated world and using its resources to make it your own. The camera follows the player around to allow for exploration of the large world, which you can save to a file to continue playing later.
+This is a 2D platformer/sandbox game built with Java and Processing, with core features similar to that of Terraria or Minecraft. You would be able to break and place blocks, while exploring the generated world and using its resources to make it your own. The camera follows the player around to allow for exploration of the large world, with darkness concealing the deep caves.
 
 **Prototype:** [Link to Doc](https://docs.google.com/document/d/1fGk8TCQy_TDWSslN20We0n-Hrf1ZC2wxaPKPVB0kvkg/edit?usp=sharing)
 
-**UML Diagram:** (most updated first)
-![Most Recent UML Diagram](.github/uml_2.png)
-![Old UML Diagram](.github/uml_1.png)
+---
+##Instructions
+
+###Setup & Running
+
+In order to run this project, you will need to download [Processing](https://processing.org/download/).
+After cloning this repo to your machine:
+```bash
+git clone https://github.com/ivanmijacika/APCSFinalProject.git
+```
+you should open `APCSFinalProject.pde` in Processing. Click play, and it should run at a smooth 50+ FPS after a few seconds of loading.
+
+###Controls
+
+Use A and D to walk left and right, and Space to jump.
+
+Press keys 0-9, or scroll your mouse wheel, to select different items in your hotbar.
+
+Press Esc to open your full inventory, where you can click on stacks of items to move, swap, and merge them.
+
+
+---
+
+##UML Diagram:
+###Most Updated:
+![Most Recent UML Diagram](.github/uml_3.png)
+###Older Versions:
+![Old UML Diagram](.github/uml_2.png)
+![Older UML Diagram](.github/uml_1.png)
 ![Original UML Diagram](.github/uml_0.png)
 [Link to Lucidchart](https://lucid.app/lucidchart/be9a82dd-a053-4a9b-a668-78d0fa196f6d/edit?invitationId=inv_59b0790f-cfa2-4bc2-a18a-2e7590836402)
 
-**Development Log:**
+---
+
+##Development Log:
 
 Yusuf Elsharawy:
 - 5/25: I finished the UML diagram and added it to `README.md`
