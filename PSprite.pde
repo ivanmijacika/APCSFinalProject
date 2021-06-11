@@ -92,5 +92,15 @@ public class PSprite implements ISprite {
         }
     }
   }
+  
+  public ISprite flipped(){
+    PImage imageF = createImage(image.width, image.height, RGB); //will be flipped image
+    for (int y=0; y<image.height; y++){
+      for (int x=0; x<image.width; x++){
+        imageF.set(x, y, image.get(image.width-x-1,y));
+      }
+    }
+    return new PSprite(imageF, getPivot(), scale);
+  }
 
 }
