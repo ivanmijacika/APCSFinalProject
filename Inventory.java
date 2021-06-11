@@ -6,17 +6,21 @@ public class Inventory extends UIElement implements IKeyListener {
     private static final int CLOSED_HEIGHT = 32;
     private static final int OPEN_HEIGHT = 140;
     
+    private Player player;
     private IInput input;
     private ISprite sprite;
+    private ISprite selectedSprite;
     private ItemStack[] stacks = new ItemStack[40];
     
     private int selected = -1;
     private boolean isOpen = false;
 
-    public Inventory(IInput input, ISpriteLoader spriteLoader) {
+    public Inventory(Player player, IInput input, ISpriteLoader spriteLoader) {
         super(new Rectangle(10, 10, 356, CLOSED_HEIGHT));
         sprite = spriteLoader.load("uiButton.png", new Vector2D(8, 8), 2);
+        selectedSprite = spriteLoader.load("uiButtonSelected.png", new Vector2D(8, 8), 2);
         this.input = input;
+        this.player = player;
     }
     
     private void drawSlot(int slot) {
@@ -24,7 +28,7 @@ public class Inventory extends UIElement implements IKeyListener {
         Vector2D pos = new Vector2D(
                 rect.getX() + 16 + 36 * (slot % 10),
                 rect.getY() + 16 + 36 * (slot / 10));
-        sprite.drawUI(pos);
+        (slot == player.getSelected() ? selectedSprite : sprite).drawUI(pos);
         if (selected != slot) {
             ItemStack stack = stacks[slot];
             if (stack != null) {

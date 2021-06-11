@@ -7,7 +7,7 @@ public class Game {
     public final ISpriteLoader spriteLoader;
     public final UIManager uiManager;
     public final INoiseGenerator noiseGenerator;
-    private final Random random = new Random();
+    public final Random random = new Random();
 
     private World world;
 
@@ -19,6 +19,8 @@ public class Game {
         this.uiManager = new UIManager(this);
         Tile.loadSprites(spriteLoader);
         world = new World(this, random.nextInt());
+        Pickaxe pick = new Pickaxe(spriteLoader);
+        world.getPlayer().getInventory().addStack(new ItemStack(pick, 1));
     }
 
     public void tick(double deltaTime) {
