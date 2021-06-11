@@ -98,6 +98,14 @@ public class Physics {
         return Math.abs(displacement.getX()) < avgSize.getX() &&
                 Math.abs(displacement.getY()) < avgSize.getY();
     }
+    
+    private static boolean onGround(Entity entity) {
+        System.out.println(entity.getVelocity().getY());
+        if (Math.abs(entity.getVelocity().getY()) > 3) return false;
+        double foot = entity.getPosition().getY() + entity.getSize().getY()/2;
+        if (Math.ceil(foot) - foot > STEP_SIZE) return false;
+        return true;
+    }
 
     private static MoveResult simpleMove(World world, Entity entity, Vector2D delta) {
         MoveResult result = MoveResult.NONE;
@@ -109,7 +117,7 @@ public class Physics {
         if (intersectsTile(world, entity)) {
             // STEP UP FUNCTIONALITY
             entity.setPosition(entity.getPosition().add(new Vector2D(0, -1)));
-            if (!entity.stepsUp() || (Math.abs(delta.getY()) <= STEP_SIZE && intersectsTile(world, entity))) {
+            if (!entity.stepsUp() || !onGround(entity) || intersectsTile(world, entity)) {
                 result = MoveResult.HIT_X;
                 entity.setPosition(entity.getPosition().subtract(new Vector2D(0, -1)));
                 // replace with more precise adjustment if necessary:
