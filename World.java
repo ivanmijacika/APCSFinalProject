@@ -7,15 +7,21 @@ public class World {
     private int width;
     private int height;
     private Tile[][] tiles;
+    private double[][] lighting;
     private Set<Entity> entities;
     private Player player;
 
     public World(Game game, int seed) {
         this.game = game;
-        width = 2000;
-        height = 1000;
+        
+        width = 200;
+        height = 200;
         tiles = new Tile[height][width];
         generateWorld(seed);
+        
+        lighting = new double[height][width];
+        recalculateLighting();
+        
         entities = new HashSet<Entity>();
         player = new Player(this, new Vector2D(width/2.0, height/2.0 - 5), new Vector2D(0, -10));
         entities.add(player);
@@ -71,8 +77,16 @@ public class World {
     }
 
     public void setTile(int x, int y, Tile t) {
-        if (0 <= x && x < width && 0 <= y && y < height)
+        if (0 <= x && x < width && 0 <= y && y < height) {
             tiles[y][x] = t;
+            if (lighting != null) {
+                if (t == Tile.AIR && y == 0) {
+                    updateLighting(x, y, 1);
+                } else {
+                    updateLighting(x, y);
+                }
+            }
+        }
     }
 
     public void setTile(TilePos pos, Tile t) {
@@ -93,11 +107,11 @@ public class World {
         TilePos bRTile = new TilePos(botRight);
         for (int y = tLTile.getY(); y <= bRTile.getY(); y++) {
             for (int x = tLTile.getX(); x <= bRTile.getX(); x++) {
-                getTile(x, y).draw(game.view, x, y);
+                getTile(x, y).draw(game.view, x, y, getLight(x, y));
             }
         }
         for (Entity e : entities) {
-            e.draw();
+            e.draw(getLight(new TilePos(e.getPosition())));
         }
     }
 
@@ -112,5 +126,71 @@ public class World {
     public Player getPlayer() {
         return player;
     }
-
+    
+    public double getLight(int x, int y) {
+        if (x < 0 || y < 0 || x >= width || y >= height) return 0;
+        return lighting[y][x];
+    }
+    
+    public double getLight(TilePos t) {
+        return getLight(t.getX(), t.getY());
+    }
+    
+    private double getLightFrom(TilePos from, TilePos to) {
+        double out = getLight(from);
+        if (getTile(from) == Tile.AIR) {
+            // to make cave illumination a feature instead of a bug
+            //if (from.getX() != to.getX()) out -= 0.1;
+        } else {
+            out -= 0.2;
+        }
+        return out;
+    }
+    
+    public void recalculateLighting() {
+        for (int x = 0; x < width; x++) {
+            if (getTile(x, 0) == Tile.AIR) {
+                updateLighting(x, 0, 1);
+            }
+        }
+    }
+    
+    public boolean inBounds(int x, int y) {
+        return 0 <= x && x < width && 0 <= y && y < height;
+    }
+    
+    public boolean inBounds(TilePos pos) {
+        return inBounds(pos.getX(), pos.getY());
+    }
+    
+    public void updateLighting(int x, int y) {
+        updateLighting(x, y, getMaxLight(new TilePos(x, y)));
+    }
+    
+    private double getMaxLight(TilePos tp) {
+        double best = 0;
+        for (TilePos neighbor : tp.neighbors()) {
+            best = Math.max(best, getLightFrom(neighbor, tp));
+        }
+        return best;
+    }
+    
+    public void updateLighting(int x, int y, double light) {
+        TilePos start = new TilePos(x, y);
+        lighting[y][x] = light;
+        
+        Queue<TilePos> toUpdate = new ArrayDeque<TilePos>(start.neighbors());
+        
+        while (!toUpdate.isEmpty()) {
+            TilePos pos = toUpdate.remove();
+            if (inBounds(pos)) {
+                double l = getMaxLight(pos);
+                if (l != getLight(pos)) {
+                    lighting[pos.getY()][pos.getX()] = l;
+                    toUpdate.addAll(pos.neighbors());
+                }
+            }
+        }
+    }
+    
 }
