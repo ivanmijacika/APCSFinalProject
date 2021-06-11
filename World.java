@@ -22,9 +22,25 @@ public class World {
         lighting = new double[height][width];
         recalculateLighting();
         
-        entities = new HashSet<Entity>();
-        player = new Player(this, new Vector2D(width/2.0, height/2.0 - 5), new Vector2D(0, -10));
-        entities.add(player);
+        entities = new LinkedHashSet<Entity>();
+        player = new Player(this, new Vector2D(width/2.0, -1), new Vector2D(0, -10));
+        lowerToGround(player);
+        addEntity(player);
+    }
+    
+    public void addEntity(Entity entity) {
+        entities.add(entity);
+    }
+    
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+    }
+    
+    private void lowerToGround(Entity entity) {
+        while (!Physics.intersectsTile(this, entity)) {
+            entity.setPosition(entity.getPosition().add(new Vector2D(0, 1)));
+        }
+        entity.setPosition(entity.getPosition().subtract(new Vector2D(0, 1)));
     }
     
     private double heightFalloff(int x, int y) {
@@ -92,10 +108,24 @@ public class World {
     public void setTile(TilePos pos, Tile t) {
         setTile(pos.getX(), pos.getY(), t);
     }
-
+    
+    public void destroy(int x, int y) {
+        Tile t = getTile(x, y);
+        if (t != Tile.AIR) {
+            ItemStack stack = new ItemStack(t.getItem(), 1);
+            ItemEntity entity = new ItemEntity(this, new Vector2D(x+0.5, y+0.5), stack);
+            addEntity(entity);
+            setTile(x, y, Tile.AIR);
+        }
+    }
+    
+    public void destroy(TilePos pos) {
+        destroy(pos.getX(), pos.getY());
+    }
+    
     public void tick(double deltaTime) {
-        for (Entity e : entities) {
-            e.tick(deltaTime);
+        for (Entity entity : new ArrayList<Entity>(entities)) {
+            entity.tick(deltaTime);
         }
     }
 
@@ -148,6 +178,9 @@ public class World {
     }
     
     public void recalculateLighting() {
+        for (double[] row : lighting) {
+            Arrays.fill(row, 0);
+        }
         for (int x = 0; x < width; x++) {
             if (getTile(x, 0) == Tile.AIR) {
                 updateLighting(x, 0, 1);
