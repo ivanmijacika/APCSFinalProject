@@ -13,12 +13,17 @@ public class TileItem extends Item {
 	}
 	
 	@Override
-	public void drawUI(Vector2D pos) {
+	public ISprite getSprite() {
 		if (sprite == null) {
 			sprite = tile.getSprite().withScale(2);
 			sprite.setPivot(new Vector2D(4, 4));
 		}
-		sprite.drawUI(pos);
+		return sprite;
+	}
+	
+	@Override
+	public void drawUI(Vector2D pos) {
+		getSprite().drawUI(pos);
 	}
 	
 	@Override
