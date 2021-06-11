@@ -1,6 +1,5 @@
 public abstract class Item{
     
-    private ISprite sprite;
     private String name;
     
     public Item(String name) {
