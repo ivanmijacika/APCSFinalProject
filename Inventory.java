@@ -60,12 +60,17 @@ public class Inventory extends UIElement implements IKeyListener {
             stacks[slot] = new ItemStack(stack, this);
             stack.setCount(0);
         } else if (inSlot.getItem() == item) {
-            int combineTo = Math.min(inSlot.getCount() + stack.getCount(), item.getMaxStackSize());
-            int overflow = Math.max(0, inSlot.getCount() + stack.getCount() - item.getMaxStackSize());
-            inSlot.setCount(combineTo);
-            stack.setCount(overflow);
+            merge(stack, inSlot);
         }
         return stack;
+    }
+    
+    private void merge(ItemStack from, ItemStack to) {
+        Item item = from.getItem();
+        int combineTo = Math.min(to.getCount() + from.getCount(), item.getMaxStackSize());
+        int overflow = Math.max(0, to.getCount() + from.getCount() - item.getMaxStackSize());
+        to.setCount(combineTo);
+        from.setCount(overflow);
     }
     
     private int getSlot(Vector2D uiPos) {
@@ -84,13 +89,21 @@ public class Inventory extends UIElement implements IKeyListener {
             } else if (selected == slot) {
                 selected = -1;
             } else {
-                // swap two items
                 ItemStack clickedStack = getStack(slot);
                 ItemStack selectedStack = getStack(selected);
-                setStack(selected, clickedStack);
-                setStack(slot, selectedStack);
-                if (clickedStack == null) {
-                    selected = -1;
+                // if same item, merge
+                if (clickedStack != null && clickedStack.getItem() == selectedStack.getItem()) {
+                    merge(selectedStack, clickedStack);
+                    if (selectedStack.getCount() <= 0) {
+                        setStack(selected, null);
+                        selected = -1;
+                    }
+                } else {  // else, swap the two stacks
+                    setStack(selected, clickedStack);
+                    setStack(slot, selectedStack);
+                    if (clickedStack == null) {
+                        selected = -1;
+                    }
                 }
             }
             return true;
