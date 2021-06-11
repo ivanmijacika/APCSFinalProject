@@ -184,7 +184,6 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         //int n = Tile.values().length;
         int n = 10;
         selectedItem = ((selectedItem % n) + n) % n;
-        System.out.println(selectedItem);
         return true;
     }
     
