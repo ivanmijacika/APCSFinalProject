@@ -79,7 +79,8 @@ Yusuf Elsharawy:
 - 6/09: I worked on a whole variety of things, most of which involved adding methods to existing classes to make the item
   system work. I fixed up all `Item`-related classes and `Tile` so that I'd be fully prepared to implement the `Inventory` tomorrow.
 - 6/10: I implemented random world generation with trees & grass, added a lighting system, finished the inventory system,
-  added a pickaxe item, and so much more refinement and polishing.
+  added a pickaxe item, and so much more refinement and polishing. I also remade the UML diagram again, and prepared
+  the prototype document & GitHub repository for the deadline.
 
 Ivan Mijacika:
 - 5/25: Re-read the prototype and prepared to start working on the project.
