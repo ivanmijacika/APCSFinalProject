@@ -1,9 +1,17 @@
 import java.util.*;
 
 public class Player extends Entity implements IMouseListener, IKeyListener {
-
+    
+    private static final int IDLE = 0;
+    private static final int JUMP = 5;
+    private static final int WALK_FIRST = 6;
+    private static final int WALK_LAST = 18;
+    
+    
+    
     private World world;
-    private ISprite sprite;
+    private ISprite[] sprites;
+    private ISprite[] spritesFlipped;
     private IInput input;
     private View view;
 
@@ -14,9 +22,9 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     private boolean debugMode = false;
 
     public Player(World world, Vector2D pos, Vector2D vel) {
-        super(world, pos, vel, new Vector2D(1.5, 2.5));
+        super(world, pos, vel, new Vector2D(1.5, 2.75));
         this.world = world;
-        sprite = world.game.spriteLoader.load("player.png", new Vector2D(6,10), 1/8.0);
+        loadSprites();
         input = world.game.input;
         view = world.game.view;
 
@@ -28,6 +36,14 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         input.addKeyListener(this);
     }
     
+    private void loadSprites() {
+        sprites = world.game.spriteLoader.load("playerSpritesheet.png", new Vector2D(10,15), 1/8.0, 19);
+        spritesFlipped = new ISprite[sprites.length];
+        for (int i = 0; i < spritesFlipped.length; i++) {
+            spritesFlipped[i] = sprites[i].flipped();
+        }
+    }
+    
     public Inventory getInventory() {
         return inventory;
     }
@@ -36,8 +52,22 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
         return selectedItem;
     }
     
+    private boolean facingRight = true;
+    private double walkAmount = 0;
+    
     @Override
     public void draw(double brightness) {
+        ISprite[] spriteArr = (facingRight ? spritesFlipped : sprites);
+        ISprite sprite;
+        if (getVelocity().getY() != 0) {
+            sprite = spriteArr[JUMP];
+        } else if (getVelocity().getX() == 0) {
+            sprite = spriteArr[IDLE];
+            walkAmount = 0;
+        } else {
+            int frame = WALK_FIRST + (int)(walkAmount % (WALK_LAST + 1 - WALK_FIRST));
+            sprite = spriteArr[frame];
+        }
         sprite.drawWithLight(world.game.view, getPosition(), brightness);
     }
     
@@ -46,7 +76,7 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
             // if on ground (exactly 0 vertical velocity), jump
             // for now we'll ignore that this will let you cling to ceilings
             if (getVelocity().getY() == 0) {
-                setVelocity(new Vector2D(getVelocity().getX(), -14.5));
+                setVelocity(new Vector2D(getVelocity().getX(), -14.6));
             }
             jumpNextFrame = false;
         }
@@ -65,6 +95,7 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
             }
             setVelocity(new Vector2D(approachZero(v.getX(), vDelta), v.getY()));
         } else {
+            facingRight = moveH == 1;
             double targetSpeed = moveH * 12;
             double vDelta = 20 * deltaTime;
             // slow start
@@ -87,13 +118,14 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
                 }
             }
         }
+        walkAmount += 2 * Math.abs(getVelocity().getX()) * deltaTime;
     }
     
     @Override
     public void tick(double deltaTime) {
         if (!debugMode) {
-            super.tick(deltaTime);
             controlPlayer(deltaTime);
+            super.tick(deltaTime);
         } else {
             int moveH = (input.isHeld('D') ? 1 : 0) - (input.isHeld('A') ? 1 : 0);
             int moveW = (input.isHeld('S') ? 1 : 0) - (input.isHeld('W') ? 1 : 0);
