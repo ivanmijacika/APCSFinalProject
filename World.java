@@ -14,8 +14,8 @@ public class World {
     public World(Game game, int seed) {
         this.game = game;
         
-        width = 100;
-        height = 100;
+        width = 2000;
+        height = 1000;
         tiles = new Tile[height][width];
         generateWorld(seed);
         
