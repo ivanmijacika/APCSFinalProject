@@ -15,7 +15,9 @@ This is a 2D platformer/sandbox game built with Java and Processing, with core f
 ---
 ##Instructions
 
-###Setup & Running
+###Setup & Execution
+
+####Via Processing:
 
 In order to run this project, you will need to download [Processing](https://processing.org/download/).
 After cloning this repo to your machine:
@@ -23,6 +25,12 @@ After cloning this repo to your machine:
 git clone https://github.com/ivanmijacika/APCSFinalProject.git
 ```
 you should open `APCSFinalProject.pde` in Processing. Click play, and it should run at a smooth 50+ FPS after a few seconds of loading.
+
+####Release:
+You can alternatively download an executable for Linux or Windows and your architecture from the
+[releases page](https://github.com/ivanmijacika/APCSFinalProject/releases).
+In order to run any one of these, you will need to have Java installed, unless you are using 64-bit Windows,
+in which case you can download the zip with Java embedded.
 
 ###Controls
 
