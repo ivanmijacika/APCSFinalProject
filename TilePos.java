@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class TilePos{
 
   private int x;
@@ -28,7 +31,12 @@ public class TilePos{
     TilePos t = new TilePos(sumX, sumY);
     return t;
   }
+  
+  public List<TilePos> neighbors() {
+    return Arrays.asList(add(-1, 0), add(1, 0), add(0, -1), add(0, 1));
+  }
 
+  @Override
   public boolean equals(Object other) {
     return (other instanceof TilePos) && equals((TilePos)other);
   }
@@ -37,8 +45,14 @@ public class TilePos{
     return getX() == other.getX() && getY() == other.getY();
   }
 
+  @Override
   public String toString() {
     return "(" + getX() + ", " + getY() + ")";
   }
-
+  
+  @Override
+  public int hashCode() {
+      return (x * 0x1f1f1f1f) ^ y;  // thanks StackOverflow
+  }
+  
 }
