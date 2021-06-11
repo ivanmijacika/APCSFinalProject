@@ -29,6 +29,29 @@ public class Inventory extends UIElement implements IKeyListener {
         }
     }
     
+    // returns remaining items
+    public ItemStack addStack(ItemStack stack) {
+        for (int i = 0; i < stacks.length && stack.getCount() > 0; i++) {
+            stack = addStack(stack, i);
+        }
+        return stack;
+    }
+    
+    public ItemStack addStack(ItemStack stack, int slot) {
+        Item item = stack.getItem();
+        ItemStack inSlot = stacks[slot];
+        if (inSlot == null) {
+            stacks[slot] = new ItemStack(stack);
+            stack.setCount(0);
+        } else if (inSlot.getItem() == item) {
+            int combineTo = Math.min(inSlot.getCount() + stack.getCount(), item.getMaxStackSize());
+            int overflow = Math.max(0, inSlot.getCount() + stack.getCount() - item.getMaxStackSize());
+            inSlot.setCount(combineTo);
+            stack.setCount(overflow);
+        }
+        return stack;
+    }
+    
     @Override
     public boolean mousePressed(IInput input, int button) {
         if(super.mousePressed(input, button)) {

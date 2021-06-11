@@ -10,6 +10,10 @@ public class ItemEntity extends Entity {
 		sprite.setPivot(new Vector2D(4, 4));
 	}
 	
+	public ItemStack getStack() {
+		return stack;
+	}
+	
 	@Override
 	public void draw(double brightness) {
 		sprite.drawWithLight(getWorld().game.view, getPosition(), brightness);

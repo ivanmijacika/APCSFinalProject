@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Player extends Entity implements IMouseListener, IKeyListener {
 
     private World world;
@@ -88,6 +90,19 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
             int moveH = (input.isHeld('D') ? 1 : 0) - (input.isHeld('A') ? 1 : 0);
             int moveW = (input.isHeld('S') ? 1 : 0) - (input.isHeld('W') ? 1 : 0);
             setPosition(getPosition().add(new Vector2D(moveH, moveW).multiply(50*deltaTime)));
+        }
+        pickupItems();
+    }
+    
+    private void pickupItems() {
+        Collection<Entity> colliding = world.getAllColliding(this);
+        for (Entity other : colliding) {
+            if (other instanceof ItemEntity) {  // i had to, or else Entity would need a method for "is this an ItemEntity"
+                ItemEntity itemEntity = (ItemEntity)other;
+                if (inventory.addStack(itemEntity.getStack()).getCount() == 0) {
+                    world.removeEntity(other);
+                }
+            }
         }
     }
 
