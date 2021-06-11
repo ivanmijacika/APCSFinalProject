@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Game {
 
     public final View view;
@@ -5,6 +7,7 @@ public class Game {
     public final ISpriteLoader spriteLoader;
     public final UIManager uiManager;
     public final INoiseGenerator noiseGenerator;
+    private final Random random = new Random();
 
     private World world;
 
@@ -15,7 +18,7 @@ public class Game {
         this.noiseGenerator = noiseGenerator;
         this.uiManager = new UIManager(this);
         Tile.loadSprites(spriteLoader);
-        world = new World(this, 0);
+        world = new World(this, random.nextInt());
     }
 
     public void tick(double deltaTime) {
