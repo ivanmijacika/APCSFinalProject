@@ -93,10 +93,10 @@ public class Physics {
         Vector2D s2 = e2.getSize();
         
         Vector2D displacement = p2.subtract(p1);
-        Vector2D totalSize = s1.add(s2);
+        Vector2D avgSize = s1.add(s2).divide(2);
         
-        return Math.abs(displacement.getX()) < totalSize.getX() &&
-                Math.abs(displacement.getY()) < totalSize.getY();
+        return Math.abs(displacement.getX()) < avgSize.getX() &&
+                Math.abs(displacement.getY()) < avgSize.getY();
     }
 
     private static MoveResult simpleMove(World world, Entity entity, Vector2D delta) {
