@@ -49,4 +49,13 @@ public abstract class Entity {
     public World getWorld() {
         return world;
     }
+    
+    protected double approachZero(double from, double by) {
+        return Math.abs(from) <= by ? 0 : from - Math.copySign(by, from);
+    }
+    
+    protected double approach(double from, double to, double by) {
+        return approachZero(from - to, by) + to;
+    }
+    
 }

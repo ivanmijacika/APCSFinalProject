@@ -30,14 +30,6 @@ public class Player extends Entity implements IMouseListener, IKeyListener {
     public void draw(double brightness) {
         sprite.drawWithLight(world.game.view, getPosition(), brightness);
     }
-
-    private double approachZero(double from, double by) {
-        return Math.abs(from) <= by ? 0 : from - Math.copySign(by, from);
-    }
-
-    private double approach(double from, double to, double by) {
-        return approachZero(from - to, by) + to;
-    }
     
     private void controlPlayer(double deltaTime) {
         if (jumpNextFrame) {

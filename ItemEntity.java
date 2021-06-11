@@ -20,7 +20,7 @@ public class ItemEntity extends Entity {
 		super.tick(deltaTime);
 		Vector2D vel = getVelocity();
 		
-		setVelocity(new Vector2D(vel.getX()*(1 - deltaTime), vel.getY()));
+		setVelocity(new Vector2D(approachZero(vel.getX(), 5*deltaTime), vel.getY()));
 	}
 	
 }
