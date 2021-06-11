@@ -41,7 +41,7 @@ public class Inventory extends UIElement implements IKeyListener {
         Item item = stack.getItem();
         ItemStack inSlot = stacks[slot];
         if (inSlot == null) {
-            stacks[slot] = new ItemStack(stack);
+            stacks[slot] = new ItemStack(stack, this);
             stack.setCount(0);
         } else if (inSlot.getItem() == item) {
             int combineTo = Math.min(inSlot.getCount() + stack.getCount(), item.getMaxStackSize());

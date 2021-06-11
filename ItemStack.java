@@ -18,6 +18,10 @@ public class ItemStack {
 		this(other.getItem(), other.getCount());
 	}
 	
+	public ItemStack(ItemStack other, Inventory inv) {
+		this(other.getItem(), other.getCount(), inv);
+	}
+	
 	public Inventory getInventory() {
 		return inventory;
 	}
