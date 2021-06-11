@@ -41,7 +41,7 @@ Yusuf Elsharawy:
   system work. I fixed up all `Item`-related classes and `Tile` so that I'd be fully prepared to implement the `Inventory` tomorrow.
 
 Ivan Mijacika:
-- 5/25: 
+- 5/25: Re-read the prototype and prepared to start working on the project.
 - 5/26: I worked on/completed the `Vector2D` class and the `TilePos` class. I also worked on the `Sprite` class and implemented most of it.
 - 5/27: I added new methods (getHeight and getWidth) to the `Sprite` class and I started working on the `Renderer` class.
 - 5/31: I continued working on the `Renderer` class by implementing a scale and changing the coordinates to fit the screen's coordinates (instead of the world's coordinates). I also made a small change to a method in the `Sprite` class.
@@ -50,3 +50,4 @@ Ivan Mijacika:
 - 6/07: I added the classes `ItemStack` and `TileItem`, which will be used in the creation of an inventory system by storing data such as the item, the count of that item, and the sprite of the item.
 - 6/08: I added the abstract class `Item`, with two get methods. There are an additional two abstract methods (`getName` and `use`) which can be used by subclasses.
 - 6/09: I added the interface `INoiseGenerator` and the class `PNoiseGenerator` that implements it. I then added a new `PNoiseGenerator` object to the main processing file and added the new interface/class to the `Game` constructor. This will all be used to implement perlin noise.
+- 6/10: I worked on `ISprite`/`PSprite` and `ISpriteLoader`/`PSpriteLoader`. I added the method drawWithLight to `PSprite`, which is the same as draw but takes into account light/darkness to modify the shade of the colors. In `PSpriteLoader` I added the methods load and flipped, which return an array of PSprites and a flipped PSprite respectively. I also added new sprites for tiles and items.
